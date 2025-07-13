@@ -1,0 +1,26 @@
+{
+    "sales": [
+        {
+            "id": "9dd5465d-ffaa-4a4c-ac6b-2003a37febb6",
+            "customer_name": "Dehiya",
+            "customer_phone": "0701272525",
+            "item_id": "27d77211-33b9-4345-aa07-5b24b33d0869",
+            "item_name": "iphone 7 & 8 backcover",
+            "category": "Back Cover",
+            "model_number": "printed",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 480,
+            "total_price": 480,
+            "profit": 80.0,
+            "date": "2025-07-07 18:59:03",
+            "type": "regular"
+        }
+    ],
+    "daily_summary": {
+        "sales_count": 1,
+        "sales_amount": 480,
+        "profit": 80.0,
+        "expenses": 0
+    }
+}

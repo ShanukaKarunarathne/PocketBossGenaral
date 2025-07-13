@@ -1,0 +1,19 @@
+{
+    "expenses": [
+        {
+            "id": "14fb0ac4-fff4-4e4e-b115-726b294f93e9",
+            "category": "Inventory Purchase",
+            "description": "Phone: TPU magsafe (Model: carbon fiber, Qty: 1)",
+            "amount": 1000.0,
+            "date": "2025-07-07 16:26:21"
+        },
+        {
+            "id": "6029a5c7-ec33-4881-a518-f21046511256",
+            "category": "Inventory Purchase",
+            "description": "Accessories: test (Model: test2, Qty: 10)",
+            "amount": 10000.0,
+            "date": "2025-07-07 16:53:03"
+        }
+    ],
+    "daily_summary": {}
+}

@@ -1,0 +1,31 @@
+{
+    "sales": [
+        {
+            "id": "d2a58153-9d21-4308-bae4-fbd408f7fe92",
+            "batch_id": "bc28cf27-1180-4e5d-8bb5-0e47e44e7783",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "e2b1b3ea-1898-4a1e-8df6-9a3f633cef70",
+            "item_name": "iphone 6 plus & 6s plus",
+            "category": "Back Cover",
+            "model_number": "carbon fiber",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 1000,
+            "total_price": 1000,
+            "profit": 310.0,
+            "date": "2025-07-09 10:35:56",
+            "type": "regular",
+            "payment_info": {
+                "type": "cash",
+                "amount": 1000.0
+            }
+        }
+    ],
+    "daily_summary": {
+        "sales_count": 1,
+        "sales_amount": 1000,
+        "profit": 310.0,
+        "expenses": 0
+    }
+}

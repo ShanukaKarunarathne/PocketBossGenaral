@@ -1,2 +1,2 @@
-# PocketBossGenaral
-Pocket POS system
+# Pocket-Boss
+my first project

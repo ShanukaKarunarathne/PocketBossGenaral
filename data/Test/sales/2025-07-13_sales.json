@@ -1,0 +1,30 @@
+{
+    "sales": [
+        {
+            "id": "b3e1c240-7144-4e85-a589-24458ec370cf",
+            "customer_name": "Shanuka",
+            "customer_phone": "0701272525",
+            "item_id": "5ea3efcc-5dc1-4d84-93bf-7180d46a5ad5",
+            "item_name": "iphone 11 pro max",
+            "category": "Back Cover",
+            "model_number": "magsafe ",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 1000,
+            "total_price": 1000,
+            "profit": 500.0,
+            "date": "2025-07-13 11:56:42",
+            "type": "regular",
+            "payment_method": "Cash",
+            "payment_details": "",
+            "credit_amount": 0.0,
+            "cash_amount": 1000.0
+        }
+    ],
+    "daily_summary": {
+        "sales_count": 1,
+        "sales_amount": 1000,
+        "profit": 500.0,
+        "expenses": 0
+    }
+}

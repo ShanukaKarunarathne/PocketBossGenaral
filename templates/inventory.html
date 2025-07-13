@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Boss</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo2.PNG') }}" type="image/jpeg">  
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        header h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            background: white;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        section h2 {
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Form Styles */
+        .multi-item-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .item-entry {
+            position: relative;
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .item-entry:hover {
+            border-color: #6366f1;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .item-entry h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ef4444;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+
+        .remove-item:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #1e293b;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: #1e293b;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group small {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-controls select,
+        .filter-controls input {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            background: white;
+        }
+
+        .filter-controls button {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-controls button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        table th {
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 1rem;
+        }
+
+        table tbody tr {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        table tbody tr:hover {
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        /* Low Stock Highlighting */
+        .low-stock {
+            background-color: rgba(245, 158, 11, 0.1) !important;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .low-stock:hover {
+            background-color: rgba(245, 158, 11, 0.15) !important;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .close {
+            color: #64748b;
+            float: right;
+            font-size: 1.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .close:hover {
+            color: #ef4444;
+        }
+
+        /* Flash Messages */
+        .flash-message {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .flash-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #065f46;
+            border: 1px solid #10b981;
+            border-left: 4px solid #10b981;
+        }
+
+        .flash-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #7f1d1d;
+            border: 1px solid #ef4444;
+            border-left: 4px solid #ef4444;
+        }
+
+        .flash-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #78350f;
+            border: 1px solid #f59e0b;
+            border-left: 4px solid #f59e0b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        /* Go to Bottom Button */
+        .go-to-bottom-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.125rem;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            z-index: 1000;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .go-to-bottom-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .go-to-bottom-btn:active {
+            transform: scale(0.95);
+        }
+
+        .go-to-bottom-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+        }
+
+        .go-to-bottom-btn::before {
+            content: '↓';
+            font-weight: bold;
+        }
+
+        /* Form Validation */
+        .form-group input.invalid {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .error-message {
+            color: #ef4444 !important;
+            font-size: 0.875rem !important;
+            margin-top: 0.25rem !important;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-controls select,
+            .filter-controls input,
+            .filter-controls button {
+                width: 100%;
+            }
+            
+            table {
+                font-size: 0.875rem;
+            }
+            
+            table th,
+            table td {
+                padding: 0.75rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+            
+            .go-to-bottom-btn {
+                width: 2.75rem;
+                height: 2.75rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+            
+            header h1 {
+                font-size: 1.25rem;
+            }
+            
+            section {
+                padding: 1rem;
+            }
+            
+            section h2 {
+                font-size: 1.25rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .item-entry {
+                padding: 1.5rem;
+            }
+            
+            .remove-item {
+                top: 0.75rem;
+                right: 0.75rem;
+                width: 1.75rem;
+                height: 1.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .go-to-bottom-btn,
+            .filter-controls,
+            .action-buttons,
+            nav {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: #1e293b !important;
+            }
+            
+            .container {
+                max-width: none !important;
+                padding: 0 !important;
+            }
+            
+            header {
+                background: white !important;
+                color: #1e293b !important;
+                box-shadow: none !important;
+                border-bottom: 2px solid #1e293b;
+            }
+            
+            section {
+                box-shadow: none !important;
+                border: 1px solid #1e293b !important;
+                page-break-inside: avoid;
+            }
+            
+            table {
+                box-shadow: none !important;
+            }
+            
+            table th {
+                background: #f8fafc !important;
+                color: #1e293b !important;
+                border: 1px solid #1e293b !important;
+            }
+            
+            table td {
+                border: 1px solid #1e293b !important;
+            }
+        }
+
+        /* Additional Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-5 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 1.5rem;
+        }
+
+        .mt-6 {
+            margin-top: 2rem;
+        }
+
+        .p-1 {
+            padding: 0.25rem;
+        }
+
+        .p-2 {
+            padding: 0.5rem;
+        }
+
+        .p-3 {
+            padding: 0.75rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .p-5 {
+            padding: 1.5rem;
+        }
+
+        .p-6 {
+            padding: 2rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 3px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50%;
+            border-top-color: #6366f1;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #1e293b;
+            color: white;
+            text-align: center;
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.875rem;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 0.625rem;
+            height: 0.625rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .status-available {
+            background-color: #10b981;
+        }
+
+        .status-low-stock {
+            background-color: #f59e0b;
+        }
+
+        .status-out-of-stock {
+            background-color: #ef4444;
+        }
+
+        /* Card Layout Alternative */
+        .card-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .inventory-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .inventory-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.25rem;
+        }
+
+        .card-category {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .card-body {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Focus Styles for Accessibility */
+        button:focus,
+        input:focus,
+        select:focus,
+        a:focus {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .btn {
+                border: 2px solid #1e293b;
+            }
+            
+            table th {
+                border: 2px solid #1e293b;
+            }
+            
+            .form-group input,
+            .form-group select {
+                border: 2px solid #1e293b;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Typography Classes */
+        .text-hero {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        .text-h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        .text-h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .text-h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .text-body {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .text-small {
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Color Classes */
+        .text-primary {
+            color: #6366f1;
+        }
+
+        .text-accent {
+            color: #10b981;
+        }
+
+        .text-secondary {
+            color: #64748b;
+        }
+
+        .text-critical {
+            color: #ef4444;
+        }
+
+        .text-warning {
+            color: #f59e0b;
+        }
+
+        .bg-primary {
+            background-color: #6366f1;
+        }
+
+        .bg-accent {
+            background-color: #10b981;
+        }
+
+        .bg-secondary {
+            background-color: #f8fafc;
+        }
+
+        /* Alert Components */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            font-weight: 500;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .alert-critical {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            color: #7f1d1d;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            color: #78350f;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            color: #065f46;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 0.75rem;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Inventory Management</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+                    <li><a href="{{ url_for('sales2') }}">Sales</a></li>
+                    <li><a href="{{ url_for('expenses') }}">Expenses</a></li>
+                    <li><a href="{{ url_for('reports') }}">Reports</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <section class="add-inventory">
+                <h2>Add Multiple Items to Inventory</h2>
+                
+                <form action="{{ url_for('add_multiple_inventory') }}" method="post" id="inventory-form">
+                    <div id="items-container" class="multi-item-form">
+                        <div class="item-entry" id="item-template">
+                            <span class="remove-item" onclick="removeItem(this)">✕</span>
+                            <h3></span></h3>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="name_0">Item Name</label>
+                                        <input type="text" id="name_0" name="items[0][name]" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <input type="hidden" name="items[0][category]" value="Accessories">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="model_number_0">Model Number</label>
+                                        <input type="text" id="model_number_0" name="items[0][model_number]" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="quantity_0">Quantity</label>
+                                        <input type="number" id="quantity_0" name="items[0][quantity]" value="1" min="1" required>
+                                        <small>Total quantity to add to inventory</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="purchase_price_0">Purchase Price (per unit)</label>
+                                        <input type="number" id="purchase_price_0" name="items[0][purchase_price]" step="0.01" required>
+                                        <small>This will be automatically added as an expense</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="supplier_0">Supplier</label>
+                                        <input type="text" id="supplier_0" name="items[0][supplier]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Items to Inventory</button>
+                    </div>
+                </form>
+            </section>
+
+            
+            <section class="inventory-list">
+                <h2>Current Inventory</h2>
+                
+                <div class="filter-controls">
+                    <input type="text" id="search-input" placeholder="Search by name or model...">
+                    
+                    <button onclick="filterInventory()">Filter</button>
+                    <button onclick="resetFilters()">Reset</button>
+                </div>
+                
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Model Number</th>
+                            <th>Purchase Price</th>
+                            <th>Quantity</th>
+                            <th>Supplier</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in inventory %}
+                        <tr class="{% if item.quantity < 5 %}low-stock{% endif %}" data-category="{{ item.category }}">
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.model_number }}</td>
+                            <td>Rs.{{ item.purchase_price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.supplier }}</td>
+                            <td>{{ item.date_added }}</td>
+                            <td class="action-buttons">
+                                <button class="edit-btn" onclick="openEditModal('{{ item.id }}')">Edit</button>
+                                <button class="delete-btn" onclick="confirmDelete('{{ item.id }}', '{{ item.name }}')">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 - Pocket Boss</p>
+        </footer>
+    </div>
+
+    <!-- Go to Bottom Button -->
+    <button class="go-to-bottom-btn" id="goToBottomBtn" onclick="goToBottom()" title="Go to Bottom"></button>
+
+    <!-- Edit Item Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Inventory Item</h2>
+            <form id="edit-form" action="" method="post">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="edit-name">Item Name</label>
+                            <input type="text" id="edit-name" name="name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <div class="category-checkboxes">
+                                <label><input type="radio" name="category" value="Phone" id="edit-category-phone" required> Phone</label>
+                                <label><input type="radio" name="category" value="Accessories" id="edit-category-accessories" required> Accessories</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="edit-model-number">Model Number</label>
+                            <input type="text" id="edit-model-number" name="model_number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group" id="edit-imei-field">
+                            <label for="edit-imei-number">IMEI Number</label>
+                            <input type="text" id="edit-imei-number" name="imei_number" pattern="[0-9]{15}" title="IMEI should be 15 digits">
+                            <small>Only required for phones</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="edit-purchase-price">Purchase Price</label>
+                            <input type="number" id="edit-purchase-price" name="purchase_price" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="edit-quantity">Quantity</label>
+                            <input type="number" id="edit-quantity" name="quantity" value="1" min="1" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="edit-supplier">Supplier</label>
+                            <input type="text" id="edit-supplier" name="supplier">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Update Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2>Confirm Deletion</h2>
+            <p id="delete-confirmation-message"></p>
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <button class="btn" onclick="closeDeleteModal()">Cancel</button>
+                <form id="delete-form" action="" method="post">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let itemCount = 1;
+        
+        function addNewItem() {
+            const container = document.getElementById('items-container');
+            const template = document.getElementById('item-template');
+            const newItem = template.cloneNode(true);
+            
+            // Update ID and name attributes
+            newItem.id = `item-${itemCount}`;
+            newItem.querySelectorAll('input, select').forEach(input => {
+                const oldName = input.name;
+                const oldId = input.id;
+                
+                // Update name attribute with new index
+                input.name = oldName.replace(/items\[\d+\]/, `items[${itemCount}]`);
+                
+                // Update id attribute with new index
+                input.id = oldId.replace(/_\d+$/, `_${itemCount}`);
+                
+                // Update label's for attribute
+                const label = input.previousElementSibling;
+                if (label && label.tagName === 'LABEL') {
+                    label.setAttribute('for', input.id);
+                }
+            });
+            
+            // Update item number display
+            newItem.querySelector('.item-number').textContent = itemCount + 1;
+            
+            // Update IMEI field ID
+            const imeiField = newItem.querySelector('.imei-field');
+            imeiField.id = `imei_field_${itemCount}`;
+            
+            // Update quantity field ID
+            const quantityField = newItem.querySelector('.quantity-field');
+            quantityField.id = `quantity_field_${itemCount}`;
+            
+            // Add the new item to the container
+            container.appendChild(newItem);
+            
+            // Initialize IMEI field visibility
+            toggleIMEIField(itemCount);
+            
+            // Increment counter
+            itemCount++;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to category radio buttons
+            document.querySelectorAll('input[name^="items"][name$="[category]"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const index = this.name.match(/\[(\d+)\]/)[1];
+                    toggleIMEIField(index);
+                });
+            });
+            
+            // Add event listeners to edit modal radio buttons
+            document.querySelectorAll('input[name="category"]').forEach(radio => {
+                radio.addEventListener('change', toggleEditIMEIField);
+            });
+        });
+
+        
+        function removeItem(button) {
+            // Don't remove if it's the only item
+            const container = document.getElementById('items-container');
+            if (container.children.length > 1) {
+                const item = button.closest('.item-entry');
+                item.remove();
+                
+                // Renumber the items
+                const items = container.querySelectorAll('.item-entry');
+                items.forEach((item, index) => {
+                    item.querySelector('.item-number').textContent = index + 1;
+                });
+            } else {
+                alert('You must have at least one item.');
+            }
+        }
+        
+        function toggleIMEIField(index) {
+            const category = document.getElementById(`category_${index}`).value;
+            const imeiField = document.getElementById(`imei_field_${index}`);
+            const imeiInput = document.getElementById(`imei_number_${index}`);
+            const quantityField = document.getElementById(`quantity_field_${index}`);
+            const phoneQuantityNote = quantityField.querySelector('.phone-quantity-note');
+            
+            if (category === 'Phone') {
+                imeiField.style.display = 'block';
+                imeiInput.setAttribute('required', '');
+                phoneQuantityNote.style.display = 'block';
+            } else {
+                imeiField.style.display = 'none';
+                imeiInput.removeAttribute('required');
+                imeiInput.value = '';
+                phoneQuantityNote.style.display = 'none';
+            }
+        }
+        
+        function toggleEditIMEIField() {
+            const category = document.getElementById('edit-category').value;
+            const imeiField = document.getElementById('edit-imei-field');
+            const imeiInput = document.getElementById('edit-imei-number');
+            
+            if (category === 'Phone') {
+                imeiField.style.display = 'block';
+                imeiInput.setAttribute('required', '');
+            } else {
+                imeiField.style.display = 'none';
+                imeiInput.removeAttribute('required');
+                imeiInput.value = '';
+            }
+        }
+        
+        function filterInventory() {
+            const categoryFilter = document.getElementById('category-filter').value;
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const table = document.getElementById('inventory-table');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const category = row.getAttribute('data-category');
+                const name = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+                const model = row.getElementsByTagName('td')[3].textContent.toLowerCase();
+                
+                const categoryMatch = !categoryFilter || category === categoryFilter;
+                const searchMatch = !searchTerm ||
+                                  name.includes(searchTerm) ||
+                                  model.includes(searchTerm);
+                
+                if (categoryMatch && searchMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+        
+        function resetFilters() {
+            document.getElementById('category-filter').value = '';
+            document.getElementById('search-input').value = '';
+            
+            const table = document.getElementById('inventory-table');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
+        }
+        
+        // Edit item functionality
+        function openEditModal(itemId) {
+            fetch(`/get_inventory_item/${itemId}`)
+                .then(response => response.json())
+                .then(item => {
+                    document.getElementById('edit-name').value = item.name;
+                    
+                    // Set radio button
+                    if (item.category === 'Phone') {
+                        document.getElementById('edit-category-phone').checked = true;
+                    } else {
+                        document.getElementById('edit-category-accessories').checked = true;
+                    }
+                    
+                    document.getElementById('edit-model-number').value = item.model_number;
+                    document.getElementById('edit-imei-number').value = item.imei_number || '';
+                    document.getElementById('edit-purchase-price').value = item.purchase_price;
+                    document.getElementById('edit-quantity').value = item.quantity;
+                    document.getElementById('edit-supplier').value = item.supplier || '';
+                    
+                    document.getElementById('edit-form').action = `/edit_inventory_item/${itemId}`;
+                    toggleEditIMEIField();
+                    document.getElementById('editModal').style.display = 'block';
+                });
+        }
+
+        
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+        
+        // Delete item functionality
+        function confirmDelete(itemId, itemName) {
+            // Set confirmation message
+            document.getElementById('delete-confirmation-message').textContent = 
+                `Are you sure you want to delete "${itemName}" from inventory? This action cannot be undone.`;
+            
+            // Set form action
+            document.getElementById('delete-form').action = `/delete_inventory_item/${itemId}`;
+            
+            // Show modal
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+        
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+        
+        // Go to Bottom functionality
+        function goToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide go to bottom button based on scroll position
+        function toggleGoToBottomButton() {
+            const button = document.getElementById('goToBottomBtn');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Hide button when near bottom (within 200px of bottom)
+            if (scrollTop + windowHeight >= documentHeight - 200) {
+                button.classList.add('hidden');
+            } else {
+                button.classList.remove('hidden');
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleIMEIField(0);
+            
+            // Add event listeners to category selects
+            document.querySelectorAll('[id^="category_"]').forEach(select => {
+                select.addEventListener('change', function() {
+                    const index = this.id.split('_')[1];
+                    toggleIMEIField(index);
+                });
+            });
+            
+            // Highlight low stock items
+            const lowStockRows = document.querySelectorAll('.low-stock');
+            lowStockRows.forEach(row => {
+                const quantityCell = row.querySelector('td:nth-child(7)');
+                if (parseInt(quantityCell.textContent) < 5) {
+                    quantityCell.style.color = '#e74c3c';
+                    quantityCell.style.fontWeight = 'bold';
+                }
+            });
+            
+            // Add scroll event listener for go to bottom button
+            window.addEventListener('scroll', toggleGoToBottomButton);
+            
+            // Initial check for button visibility
+            toggleGoToBottomButton();
+            
+            // Close modals when clicking outside
+            window.onclick = function(event) {
+                const editModal = document.getElementById('editModal');
+                const deleteModal = document.getElementById('deleteModal');
+                
+                if (event.target === editModal) {
+                    closeEditModal();
+                }
+                
+                if (event.target === deleteModal) {
+                    closeDeleteModal();
+                }
+            };
+            
+            // Auto-hide flash messages after 5 seconds
+            setTimeout(function() {
+                const flashMessages = document.querySelectorAll('.flash-message');
+                flashMessages.forEach(message => {
+                    message.style.display = 'none';
+                });
+            }, 5000);
+        });
+        
+        // Form validation before submit
+        document.getElementById('inventory-form').addEventListener('submit', function(event) {
+            const items = document.querySelectorAll('.item-entry');
+            let valid = true;
+            
+            items.forEach((item, index) => {
+                const category = document.getElementById(`category_${index}`).value;
+                const imeiInput = document.getElementById(`imei_number_${index}`);
+                
+                if (category === 'Phone' && (!imeiInput.value || !imeiInput.checkValidity())) {
+                    valid = false;
+                    imeiInput.classList.add('invalid');
+                    
+                    // Show error message
+                    let errorMsg = imeiInput.nextElementSibling;
+                    if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+                        errorMsg = document.createElement('small');
+                        errorMsg.classList.add('error-message');
+                        errorMsg.style.color = '#e74c3c';
+                        imeiInput.parentNode.appendChild(errorMsg);
+                    }
+                    errorMsg.textContent = 'IMEI number is required for phones and must be 15 digits.';
+                } else if (imeiInput) {
+                    imeiInput.classList.remove('invalid');
+                    const errorMsg = imeiInput.nextElementSibling.nextElementSibling;
+                    if (errorMsg && errorMsg.classList.contains('error-message')) {
+                        errorMsg.remove();
+                    }
+                }
+            });
+            
+            if (!valid) {
+                event.preventDefault();
+                alert('Please fix the errors in the form before submitting.');
+            }
+        });
+        
+        // Helper function to generate unique IMEI for demo purposes
+        function generateIMEI() {
+            let imei = '';
+            for (let i = 0; i < 15; i++) {
+                imei += Math.floor(Math.random() * 10);
+            }
+            return imei;
+        }
+    </script>
+</body>
+</html>

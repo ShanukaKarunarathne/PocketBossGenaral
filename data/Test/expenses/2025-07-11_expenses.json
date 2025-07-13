@@ -1,0 +1,19 @@
+{
+    "expenses": [
+        {
+            "id": "d29d606f-6aec-4bd0-b07b-ae086a62fccc",
+            "category": "Inventory Purchase",
+            "description": "Accessories: test01 (Model: test02, Qty: 10)",
+            "amount": 10000.0,
+            "date": "2025-07-11 14:48:58"
+        },
+        {
+            "id": "9823cc6b-a77e-4d6e-b7eb-7090c5b6fed0",
+            "category": "Trade-in Purchase",
+            "description": "Trade-in Phone: test02 (Model: test02, IMEI: 1111)",
+            "amount": 1000.0,
+            "date": "2025-07-11 15:01:38"
+        }
+    ],
+    "daily_summary": {}
+}

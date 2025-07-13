@@ -1,0 +1,62 @@
+{
+    "initial_capital": 0,
+    "current_capital": 43500.0,
+    "daily_updates": [
+        {
+            "date": "2025-07-13",
+            "sales": 1000,
+            "expenses": 0,
+            "daily_profit": 1000,
+            "capital_before": 42500.0,
+            "capital_after": 43500.0
+        },
+        {
+            "date": "2025-07-11",
+            "sales": 8580.0,
+            "expenses": 11000.0,
+            "daily_profit": -2420.0,
+            "capital_before": 44920.0,
+            "capital_after": 46100.0
+        },
+        {
+            "date": "2025-07-10",
+            "sales": 41500,
+            "expenses": 0,
+            "daily_profit": 41500,
+            "capital_before": 3420.0,
+            "capital_after": 4420.0
+        },
+        {
+            "date": "2025-07-09",
+            "sales": 1000,
+            "expenses": 0,
+            "daily_profit": 1000,
+            "capital_before": 2420.0,
+            "capital_after": 3420.0
+        },
+        {
+            "date": "2025-07-08",
+            "sales": 3000,
+            "expenses": 1000.0,
+            "daily_profit": 2000.0,
+            "capital_before": 420.0,
+            "capital_after": -580.0
+        },
+        {
+            "date": "2025-07-07",
+            "sales": 480,
+            "expenses": 11000.0,
+            "daily_profit": -10520.0,
+            "capital_before": 10940,
+            "capital_after": 420.0
+        },
+        {
+            "date": "2025-05-31",
+            "sales": 10940,
+            "expenses": 0,
+            "daily_profit": 10940,
+            "capital_before": 0,
+            "capital_after": 1000
+        }
+    ]
+}

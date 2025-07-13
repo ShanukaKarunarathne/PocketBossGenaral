@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Boss</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo2.PNG') }}" type="image/jpeg">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<style>
+    /* Reset and base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Header styles */
+    header {
+        background-color: #2563eb;
+        color: white;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);
+    }
+
+    header h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+    }
+
+    nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main content */
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Section styles */
+    section {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+    section h2 {
+        color: #2563eb;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Form styles */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Button styles */
+    .btn {
+        background-color: #2563eb;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #1d4ed8;
+    }
+
+    .btn-secondary {
+        background-color: #6b7280;
+    }
+
+    .btn-secondary:hover {
+        background-color: #4b5563;
+    }
+
+    /* Search section styles */
+    .search-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        align-items: end;
+    }
+
+    .search-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .amount-filter {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .amount-filter input {
+        flex: 1;
+    }
+
+    .amount-filter span {
+        color: #6b7280;
+        font-weight: 500;
+    }
+
+    /* Table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th {
+        background-color: #2563eb;
+        color: white;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    th:first-child {
+        border-radius: 5px 0 0 0;
+    }
+
+    th:last-child {
+        border-radius: 0 5px 0 0;
+    }
+
+    td {
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    tbody tr:hover {
+        background-color: #f8fafc;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9fafb;
+    }
+
+    tbody tr:nth-child(even):hover {
+        background-color: #f1f5f9;
+    }
+
+    /* No results message */
+    .no-results {
+        text-align: center;
+        padding: 2rem;
+        color: #6b7280;
+        font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #2563eb;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 10px;
+        }
+        
+        nav ul {
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        section {
+            padding: 1rem;
+        }
+        
+        .search-container {
+            grid-template-columns: 1fr;
+        }
+        
+        .amount-filter {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        table {
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 0.5rem;
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        table {
+            font-size: 0.8rem;
+        }
+        
+        th, td {
+            padding: 0.25rem;
+        }
+        
+        .btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+</style>
+<body>
+    <div class="container">
+        <header>
+            <h1>Expenses Management</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+                    <li><a href="{{ url_for('sales2') }}">Sales</a></li>
+                    <li><a href="{{ url_for('expenses') }}">Expenses</a></li>
+                    <li><a href="{{ url_for('reports') }}">Reports</a></li>
+                </ul>
+            </nav>
+        </header>
+                
+        <main>
+            <section class="add-expense">
+                <h2>Add New Expense</h2>
+                <form action="{{ url_for('add_expense') }}" method="post">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" required>
+                    </div>
+                                        
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="Rent">Rent</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Inventory Purchase">Inventory Purchase</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                                        
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" name="amount" step="0.01" required>
+                    </div>
+                                        
+                    <button type="submit" class="btn">Add Expense</button>
+                </form>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-expenses">
+                <h2>Search Expenses</h2>
+                <div class="search-container">
+                    <div class="search-group">
+                        <label for="searchInput">Search by Description:</label>
+                        <input type="text" id="searchInput" placeholder="Enter description...">
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="categoryFilter">Filter by Category:</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Inventory Purchase">Inventory Purchase</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="amountFilter">Filter by Amount:</label>
+                        <div class="amount-filter">
+                            <input type="number" id="minAmount" placeholder="Min amount" step="0.01">
+                            <span>to</span>
+                            <input type="number" id="maxAmount" placeholder="Max amount" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="clearFilters" class="btn btn-secondary">Clear Filters</button>
+                </div>
+            </section>
+                        
+            <section class="expenses-list">
+                <h2>Today's Expenses</h2>
+                <div id="noResults" class="no-results" style="display: none;">
+                    <p>No expenses found matching your search criteria.</p>
+                </div>
+                <table id="expensesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                        <tr>
+                            <td>{{ expense.id }}</td>
+                            <td>{{ expense.description }}</td>
+                            <td>{{ expense.category }}</td>
+                            <td>Rs.{{ expense.amount }}</td>
+                            <td>{{ expense.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+                
+        <footer>
+            <p>&copy; 2025 - Pocket Boss</p>
+        </footer>
+    </div>
+
+    <script>
+        // Search and filter functionality
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const minAmountInput = document.getElementById('minAmount');
+        const maxAmountInput = document.getElementById('maxAmount');
+        const clearFiltersBtn = document.getElementById('clearFilters');
+        const table = document.getElementById('expensesTable');
+        const noResults = document.getElementById('noResults');
+
+        function filterExpenses() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCategory = categoryFilter.value;
+            const minAmount = parseFloat(minAmountInput.value) || 0;
+            const maxAmount = parseFloat(maxAmountInput.value) || Infinity;
+            
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            let visibleRows = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const description = row.cells[1].textContent.toLowerCase();
+                const category = row.cells[2].textContent;
+                const amount = parseFloat(row.cells[3].textContent.replace('Rs.', ''));
+
+                const matchesSearch = description.includes(searchTerm);
+                const matchesCategory = !selectedCategory || category === selectedCategory;
+                const matchesAmount = amount >= minAmount && amount <= maxAmount;
+
+                if (matchesSearch && matchesCategory && matchesAmount) {
+                    row.style.display = '';
+                    visibleRows++;
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+
+            // Show/hide no results message
+            if (visibleRows === 0) {
+                noResults.style.display = 'block';
+                table.style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                table.style.display = 'table';
+            }
+        }
+
+        function clearFilters() {
+            searchInput.value = '';
+            categoryFilter.value = '';
+            minAmountInput.value = '';
+            maxAmountInput.value = '';
+            filterExpenses();
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterExpenses);
+        categoryFilter.addEventListener('change', filterExpenses);
+        minAmountInput.addEventListener('input', filterExpenses);
+        maxAmountInput.addEventListener('input', filterExpenses);
+        clearFiltersBtn.addEventListener('click', clearFilters);
+    </script>
+</body>
+</html>

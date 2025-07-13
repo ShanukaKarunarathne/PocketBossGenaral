@@ -1,0 +1,63 @@
+{
+    "sales": [
+        {
+            "id": "3493ec56-d048-4ce9-a183-517881dcb2ff",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "27d77211-33b9-4345-aa07-5b24b33d0869",
+            "item_name": "iphone 7 & 8 backcover",
+            "category": "Back Cover",
+            "model_number": "printed",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 1000,
+            "total_price": 1000,
+            "profit": 600.0,
+            "date": "2025-07-08 12:55:10",
+            "type": "regular"
+        },
+        {
+            "id": "b0abe983-8c6c-4b74-b7ef-62bfbd8c1c2e",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "e7a176f3-935e-4fca-abc8-dd23f574e80d",
+            "item_name": "iphone 11 pro max",
+            "category": "Back Cover",
+            "model_number": "printed",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 1000,
+            "total_price": 1000,
+            "profit": 600.0,
+            "date": "2025-07-08 14:00:31",
+            "type": "regular"
+        },
+        {
+            "id": "330a82f5-c52c-4abc-bf24-cfc9af27a4d8",
+            "batch_id": "87f0fc99-157c-4da9-9682-72f13d4275cb",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "a7cf27b2-b4ac-4825-a555-97a78e9dce76",
+            "item_name": "iphone 7 & 8 backcover",
+            "category": "Back Cover",
+            "model_number": "carbon",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 1000,
+            "total_price": 1000,
+            "profit": 310.0,
+            "date": "2025-07-08 17:13:18",
+            "type": "regular",
+            "payment_info": {
+                "type": "cash",
+                "amount": 1000.0
+            }
+        }
+    ],
+    "daily_summary": {
+        "sales_count": 3,
+        "sales_amount": 3000,
+        "profit": 1510.0,
+        "expenses": 0
+    }
+}

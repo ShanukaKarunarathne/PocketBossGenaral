@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Boss</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo2.PNG') }}" type="image/jpeg">  
+</head>
+<style>
+    /* Reset and Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(37, 99, 235, 0.2);
+    }
+
+    header h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+    }
+
+    nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content */
+    main {
+        padding: 2rem 0;
+    }
+
+    /* Section Styles */
+    section {
+        background: white;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+        color: #1d4ed8;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Form Styles */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #374151;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Button Styles */
+    .btn,
+    .action-button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn:hover,
+    .action-button:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .action-button.secondary {
+        background: #6b7280;
+    }
+
+    .action-button.secondary:hover {
+        background: #4b5563;
+    }
+
+    .btn:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Action Buttons Container */
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    /* Search Container */
+    .search-container {
+        position: relative;
+    }
+
+    .search-filters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .select-container {
+        position: relative;
+    }
+
+    .custom-select {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .select-option {
+        padding: 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid #f3f4f6;
+        transition: background-color 0.2s ease;
+    }
+
+    .select-option:hover {
+        background-color: #f8fafc;
+    }
+
+    .select-option:last-child {
+        border-bottom: none;
+    }
+
+    .no-results {
+        color: #6b7280;
+        font-style: italic;
+        cursor: default !important;
+    }
+
+    .no-results:hover {
+        background-color: white !important;
+    }
+
+    /* Cart Styles */
+    .cart-items {
+        background: #f8fafc;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .empty-cart-message {
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+        padding: 2rem;
+    }
+
+    .cart-item {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .cart-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .cart-item.trade-in-item {
+        border-left: 4px solid #dc2626;
+    }
+
+    .cart-item.borrowed-item {
+        border-left: 4px solid #059669;
+    }
+
+    .cart-item-details {
+        flex: 1;
+    }
+
+    .cart-item-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .cart-item-actions label {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .cart-item-actions input {
+        width: 80px;
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+    }
+
+    .selling-price-input {
+        width: 100px !important;
+    }
+
+    .remove-item {
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .remove-item:hover {
+        background: #b91c1c;
+    }
+
+    .cart-summary {
+        text-align: right;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #1d4ed8;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 2px solid #e5e7eb;
+    }
+
+    /* Customer Info */
+    .customer-info {
+        background: #eff6ff;
+        border: 2px solid #bfdbfe;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .customer-info h3 {
+        color: #1d4ed8;
+        margin-bottom: 1rem;
+    }
+
+    /* Item Type Badges */
+    .item-category-badge,
+    .item-type-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+    }
+
+    .item-category-badge {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .trade-in-badge {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .borrowed-badge {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .regular-badge {
+        background: #e0e7ff;
+        color: #3730a3;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .receipt-modal-content {
+        max-width: 800px;
+    }
+
+    .close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: #6b7280;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close:hover {
+        color: #dc2626;
+    }
+
+    .modal h3 {
+        color: #1d4ed8;
+        margin-bottom: 1.5rem;
+        padding-right: 2rem;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-grid .full-width {
+        grid-column: 1 / -1;
+    }
+
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th,
+    td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+        background: #f8fafc;
+        font-weight: 600;
+        color: #374151;
+        position: sticky;
+        top: 0;
+    }
+
+    tr:hover {
+        background-color: #f8fafc;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+    }
+
+    /* View Receipt Button */
+    .view-receipt-btn {
+        background: #059669;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .view-receipt-btn:hover {
+        background: #047857;
+    }
+
+    /* Receipt Styles */
+    .receipt-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .receipt-header h2 {
+        color: #1d4ed8;
+        margin-bottom: 0.5rem;
+    }
+
+    .receipt-info {
+        margin-bottom: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .receipt-items table {
+        margin-bottom: 2rem;
+    }
+
+    .receipt-items th {
+        background: #1d4ed8;
+        color: white;
+    }
+
+    .trade-in-row {
+        background: #fef2f2;
+        color: #dc2626;
+    }
+
+    .total-row {
+        background: #eff6ff;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .receipt-footer {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 2px solid #e5e7eb;
+        color: #6b7280;
+    }
+
+    .receipt-actions {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 2px solid #e5e7eb;
+    }
+
+    /* Loading and Error States */
+    .loading,
+    .error {
+        text-align: center;
+        padding: 2rem;
+        font-size: 1.1rem;
+    }
+
+    .loading {
+        color: #6b7280;
+    }
+
+    .error {
+        color: #dc2626;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+    }
+
+    /* Footer */
+    footer {
+        background: #374151;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 10px;
+        }
+        
+        nav ul {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-row,
+        .search-filters,
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .cart-item {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cart-item-actions {
+            justify-content: flex-start;
+        }
+        
+        .modal-content {
+            margin: 10% auto;
+            width: 95%;
+            padding: 1rem;
+        }
+        
+        table {
+            font-size: 0.9rem;
+        }
+        
+        th,
+        td {
+            padding: 0.5rem;
+        }
+
+        .receipt-info {
+            grid-template-columns: 1fr;
+        }
+        
+        .cart-item-actions input {
+            width: 70px;
+        }
+        
+        .selling-price-input {
+            width: 90px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.5rem;
+        }
+        
+        section {
+            padding: 1rem;
+        }
+        
+        .action-button,
+        .btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .modal-content {
+            margin: 5% auto;
+            padding: 1rem;
+        }
+        
+        .cart-item-actions {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .cart-item-actions label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .cart-item-actions input {
+            margin-left: auto;
+            width: 80px;
+        }
+        
+        table {
+            font-size: 0.8rem;
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
+        }
+        
+        thead,
+        tbody,
+        tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+    }
+
+    /* Print Styles */
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        
+        .receipt-content,
+        .receipt-content * {
+            visibility: visible;
+        }
+        
+        .receipt-actions {
+            display: none !important;
+        }
+        
+        .modal {
+            position: static;
+            background: none;
+        }
+        
+        .modal-content {
+            box-shadow: none;
+            margin: 0;
+            padding: 0;
+            max-width: none;
+            width: 100%;
+        }
+        
+        .receipt-header h2 {
+            color: #000 !important;
+        }
+        
+        .receipt-items th {
+            background: #f0f0f0 !important;
+            color: #000 !important;
+        }
+    }
+
+    /* Utility Classes */
+    .text-center {
+        text-align: center;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .mb-1 {
+        margin-bottom: 0.5rem;
+    }
+
+    .mb-2 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+
+    .mt-1 {
+        margin-top: 0.5rem;
+    }
+
+    .mt-2 {
+        margin-top: 1rem;
+    }
+
+    .mt-3 {
+        margin-top: 1.5rem;
+    }
+
+    .p-1 {
+        padding: 0.5rem;
+    }
+
+    .p-2 {
+        padding: 1rem;
+    }
+
+    .p-3 {
+        padding: 1.5rem;
+    }
+
+    /* Animation Classes */
+    .fade-in {
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .slide-in {
+        animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    /* Focus States for Accessibility */
+    button:focus,
+    input:focus,
+    select:focus {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+    }
+
+    /* Custom Scrollbar */
+    .custom-select::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .custom-select::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .custom-select::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+
+    .custom-select::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    /* Success and Error Messages */
+    .success-message {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #a7f3d0;
+        margin-bottom: 1rem;
+    }
+
+    .error-message {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #fecaca;
+        margin-bottom: 1rem;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #2563eb;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Tooltip Styles */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: #374151;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px;
+        position: absolute;
+        z-index: 1001;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -100px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 0.9rem;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Enhanced Table Styles for Better Mobile Experience */
+    @media (max-width: 768px) {
+        .sales-list table {
+            border: 0;
+        }
+        
+        .sales-list table caption {
+            font-size: 1.3em;
+        }
+        
+        .sales-list table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        
+        .sales-list table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: 0.625em;
+            padding: 0.35em;
+        }
+        
+        .sales-list table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: 0.8em;
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+        
+        .sales-list table td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #374151;
+        }
+    }
+
+    /* Dark mode support (optional) */
+    @media (prefers-color-scheme: dark) {
+        /* You can add dark mode styles here if needed */
+    }
+    .imei-input {
+        width: 150px;
+        font-family: monospace;
+        font-size: 12px;
+    }
+
+    .cart-item-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .cart-item-actions label {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+    }
+
+    .cart-item-actions input {
+        margin-top: 2px;
+        padding: 4px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    /* Payment Method Styles */
+    .payment-method-group {
+        background: #f0f9ff;
+        border: 2px solid #bae6fd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .payment-details-input {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+    }
+
+    .partial-payment-info {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .payment-status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+    }
+
+    .payment-paid {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .payment-partial {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    .payment-pending {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .pro-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .pro-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .pro-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    header {
+        position: relative;
+    }
+</style>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pocket Boss</h1>
+            <a href="#" class="pro-btn" title="Go to Pro Version" onclick="askPassword(event)">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </a>
+        </header>
+           
+        <main>
+            <section class="add-sale">
+                <h2>Record New Sale</h2>
+                
+                <div class="action-buttons">
+                    <button class="action-button" id="add-trade-in-btn">Add Trade-in</button>
+                    <button class="action-button secondary" id="add-borrowed-item-btn">Add Borrowed Item</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="item-search">Search Item (by name, model)</label>
+                    <div class="search-container">
+                        <div class="search-filters">
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <select id="type-filter">
+                                <option value="">All Types</option>
+                                <option value="New">New</option>
+                                <option value="Used">Used</option>
+                                <option value="Refurbished">Refurbished</option>
+                            </select>
+                        </div>
+                        <input type="text" id="item-search" placeholder="Start typing to search...">
+                        
+                        <div class="select-container">
+                            <div class="custom-select" id="custom-select">
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="cart-items" id="cart-container">
+                    <div class="empty-cart-message" id="empty-cart-message">
+                        No items added to cart yet. Search and add items above.
+                    </div>
+                    <div id="cart-items-list">
+                        <!-- Cart items will be added here by JavaScript -->
+                    </div>
+                    <div class="cart-summary" id="cart-summary" style="display: none;">
+                        Total: <span id="cart-total">Rs.0.00</span>
+                    </div>
+                </div>
+                
+                <form action="{{ url_for('add_multiple_sales') }}" method="post" id="sale-form">
+                    <div class="customer-info" id="customer-info" style="display: none;">
+                        <h3>Customer Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customer_name">Customer Name</label>
+                                <input type="text" id="customer_name" name="customer_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer_phone">Phone Number</label>
+                                <input type="tel" id="customer_phone" name="customer_phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
+                            </div>
+                        </div>
+                        <!-- Add this new row for payment method -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="payment_method">Payment Method</label>
+                                <select id="payment_method" name="payment_method" required>
+                                    <option value="">Select Payment Method</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Card">Card</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                    <option value="Cheque">Cheque</option>
+                                    <option value="Partial Payment">Cash+Credit</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="payment-details-group" style="display: none;">
+                                <label for="payment_details">Payment Details</label>
+                                <input type="text" id="payment_details" name="payment_details" placeholder="Enter payment details">
+                            </div>
+                        </div>
+                        <!-- Add partial payment fields -->
+                        <div class="form-row" id="partial-payment-row" style="display: none;">
+                            <div class="form-group">
+                                <label for="amount_paid">Amount Paid</label>
+                                <input type="number" id="amount_paid" name="amount_paid" min="0" step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="remaining_amount">Remaining Amount</label>
+                                <input type="number" id="remaining_amount" name="remaining_amount" readonly placeholder="0.00">
+                            </div>
+                        </div>
+                        <!-- Add this after the partial-payment-row div -->
+                        <div class="form-row" id="due-date-row" style="display: none;">
+                            <div class="form-group">
+                                <label for="due_date">Due Date</label>
+                                <input type="date" id="due_date" name="due_date" min="">
+                            </div>
+                            <div class="form-group">
+                                <label for="credit_description">Credit Description</label>
+                                <input type="text" id="credit_description" name="credit_description" placeholder="Optional description for credit">
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <input type="hidden" id="cart-data" name="cart_data" value="">
+                    <input type="hidden" id="trade-in-data" name="trade_in_data" value="">
+                    <input type="hidden" id="borrowed-items-data" name="borrowed_items_data" value="">
+                    <button type="submit" class="btn" id="complete-sale-btn" disabled>Complete Sale & Generate Receipt</button>
+                </form>
+            </section>
+            
+            <!-- Trade-in Modal -->
+            <div id="trade-in-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-trade-in">&times;</span>
+                    <h3>Add Trade-in Phone</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="trade-in-name">Item Name</label>
+                            <input type="text" id="trade-in-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-in-model">Model</label>
+                            <input type="text" id="trade-in-model" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-in-imei">Discription</label>
+                            <input type="text" id="trade-in-imei" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-in-type">Type</label>
+                            <select id="trade-in-type">
+                                <option value="New">New</option>
+                                <option value="Used" selected>Used</option>
+                                <option value="Refurbished">Refurbished</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-in-price">Trade-in Value (Rs.)</label>
+                            <input type="number" id="trade-in-price" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="button" id="add-trade-in-to-cart" class="action-button">Add to Transaction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Borrowed Item Modal -->
+            <div id="borrowed-item-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-borrowed">&times;</span>
+                    <h3>Add Borrowed Item</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="borrowed-name">Item Name</label>
+                            <input type="text" id="borrowed-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="borrowed-phone" name="borrowed-category" value="Phone" onchange="handleBorrowedCategoryChange(this)">
+                                    Phone
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="borrowed-accessory" name="borrowed-category" value="Accessory" onchange="handleBorrowedCategoryChange(this)">
+                                    Accessories
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowed-model">Model Name</label>
+                            <input type="text" id="borrowed-model" required>
+                        </div>
+                        <div class="form-group" id="borrowed-imei-group" style="display: none;">
+                            <label for="borrowed-imei">Discription</label>
+                            <input type="text" id="borrowed-imei" pattern="[0-9]{15}" placeholder="Enter 15-digit IMEI">
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowed-supplier">Supplier/Source</label>
+                            <input type="text" id="borrowed-supplier" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowed-cost">Cost Price (Rs.)</label>
+                            <input type="number" id="borrowed-cost" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowed-selling">Selling Price (Rs.)</label>
+                            <input type="number" id="borrowed-selling" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowed-quantity">Quantity</label>
+                            <input type="number" id="borrowed-quantity" min="1" value="1" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="button" id="add-borrowed-to-cart" class="action-button secondary">Add to Transaction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Receipt Modal -->
+            <div id="receipt-modal" class="modal">
+                <div class="modal-content receipt-modal-content">
+                    <span class="close" id="close-receipt">&times;</span>
+                    <div id="receipt-content">
+                        <!-- Receipt content will be loaded here -->
+                    </div>
+                    <div class="receipt-actions">
+                        <button id="print-receipt" class="action-button">Print Receipt</button>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="sales-list">
+                <h2>Today's Sales</h2>
+                
+                <!-- Add this debug info -->
+                <p>Number of sales: {{ sales|length }}</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Item</th>
+                            <th>Model</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if sales %}
+                            {% for sale in sales %}
+                            <tr>
+                                <td>{{ sale.customer_name }}</td>
+                                <td>{{ sale.customer_phone }}</td>
+                                <td>{{ sale.item_name }}</td>
+                                <td>{{ sale.model_number }}</td>
+                                <td>{{ sale.quantity }}</td>
+                                <td>Rs.{{ sale.total_price }}</td>
+                                <td>{{ sale.date }}</td>
+                                <td>
+                                    {% if sale.type == 'trade_in' %}
+                                    <span class="item-type-badge trade-in-badge">Trade-in</span>
+                                    {% elif sale.type == 'borrowed_and_sold' %}
+                                    <span class="item-type-badge borrowed-badge">Borrowed</span>
+                                    {% else %}
+                                    <span class="item-type-badge regular-badge">Regular</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button class="view-receipt-btn" data-customer="{{ sale.customer_name }}" data-phone="{{ sale.customer_phone }}" data-date="{{ sale.date }}" data-sale-id="{{ sale.id }}">View Receipt</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="13" class="no-data">No sales recorded today</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 - Pocket Boss</p>
+        </footer>
+    </div>
+    <script>
+
+        // Add these variables with your other DOM element declarations
+        const dueDateRow = document.getElementById('due-date-row');
+        const dueDateInput = document.getElementById('due_date');
+        const creditDescriptionInput = document.getElementById('credit_description');
+
+        // DOM Elements
+        const itemSearch = document.getElementById('item-search');
+        const customSelect = document.getElementById('custom-select');
+        const cartItemsList = document.getElementById('cart-items-list');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartSummary = document.getElementById('cart-summary');
+        const cartTotal = document.getElementById('cart-total');
+        const cartData = document.getElementById('cart-data');
+        const tradeInData = document.getElementById('trade-in-data');
+        const borrowedItemsData = document.getElementById('borrowed-items-data');
+        const completeSaleBtn = document.getElementById('complete-sale-btn');
+        const customerInfo = document.getElementById('customer-info');
+        const categoryFilter = document.getElementById('category-filter');
+        const typeFilter = document.getElementById('type-filter');
+
+        
+        // Trade-in Modal Elements
+        const tradeInModal = document.getElementById('trade-in-modal');
+        const addTradeInBtn = document.getElementById('add-trade-in-btn');
+        const closeTradeIn = document.getElementById('close-trade-in');
+        const addTradeInToCart = document.getElementById('add-trade-in-to-cart');
+        
+        // Borrowed Item Modal Elements
+        const borrowedItemModal = document.getElementById('borrowed-item-modal');
+        const addBorrowedItemBtn = document.getElementById('add-borrowed-item-btn');
+        const closeBorrowed = document.getElementById('close-borrowed');
+        const addBorrowedToCart = document.getElementById('add-borrowed-to-cart');
+
+        // Receipt Modal Elements
+        const receiptModal = document.getElementById('receipt-modal');
+        const closeReceipt = document.getElementById('close-receipt');
+        const receiptContent = document.getElementById('receipt-content');
+        const printReceiptBtn = document.getElementById('print-receipt');
+        
+        // Data Storage
+        let inventory = {{ inventory|tojson }};
+        let cart = [];
+        let tradeIns = [];
+        let borrowedItems = [];
+        
+        // Event Listeners
+        categoryFilter.addEventListener('change', handleSearch);
+        typeFilter.addEventListener('change', handleSearch);
+
+        itemSearch.addEventListener('input', handleSearch);
+        itemSearch.addEventListener('focus', () => {
+            if (itemSearch.value.length > 0) {
+                customSelect.style.display = 'block';
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (e.target !== itemSearch && e.target !== customSelect) {
+                customSelect.style.display = 'none';
+            }
+        });
+        
+        // Trade-in Modal Events
+        addTradeInBtn.addEventListener('click', () => {
+            tradeInModal.style.display = 'block';
+        });
+        
+        closeTradeIn.addEventListener('click', () => {
+            tradeInModal.style.display = 'none';
+        });
+        
+        addTradeInToCart.addEventListener('click', addTradeInToTransaction);
+        
+        // Borrowed Item Modal Events
+        addBorrowedItemBtn.addEventListener('click', () => {
+            borrowedItemModal.style.display = 'block';
+        });
+        
+        closeBorrowed.addEventListener('click', () => {
+            borrowedItemModal.style.display = 'none';
+        });
+        
+        addBorrowedToCart.addEventListener('click', addBorrowedItemToTransaction);
+
+        // Receipt Modal Events
+        closeReceipt.addEventListener('click', () => {
+            receiptModal.style.display = 'none';
+        });
+
+        printReceiptBtn.addEventListener('click', () => {
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Receipt</title>');
+            printWindow.document.write('<link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">');
+            printWindow.document.write('<style>body { font-family: Arial, sans-serif; } .receipt-actions { display: none; }</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(receiptContent.innerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        });
+
+        // Add event listeners to view receipt buttons
+        document.querySelectorAll('.view-receipt-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const saleId = this.getAttribute('data-sale-id');
+                const customerName = this.getAttribute('data-customer');
+                const customerPhone = this.getAttribute('data-phone');
+                const saleDate = this.getAttribute('data-date');
+                
+                // Fetch the receipt data for this sale
+                fetchReceiptData(saleId, customerName, customerPhone, saleDate);
+            });
+        });
+        
+        // Form submission
+// Update the existing form submission event listener
+        document.getElementById('sale-form').addEventListener('submit', function(e) {
+            // Validate IMEI numbers for phones
+            for (let item of cart) {
+                if (item.category === 'Phone' && !item.imei_number) {
+                    e.preventDefault();
+                    alert(`Please enter IMEI number for ${item.name}`);
+                    return;
+                }
+            }
+            
+            // Validate payment method
+            const paymentMethod = paymentMethodSelect.value;
+            if (!paymentMethod) {
+                e.preventDefault();
+                alert('Please select a payment method');
+                return;
+            }
+            
+            // Validate partial payment
+            if (paymentMethod === 'Partial Payment') {
+                const amountPaid = parseFloat(amountPaidInput.value) || 0;
+                const totalAmount = parseFloat(cartTotal.textContent.replace('Rs.', '')) || 0;
+                
+                if (amountPaid <= 0) {
+                    e.preventDefault();
+                    alert('Please enter a valid amount paid');
+                    return;
+                }
+                
+                if (amountPaid > totalAmount) {
+                    e.preventDefault();
+                    alert('Amount paid cannot exceed total amount');
+                    return;
+                }
+                
+                // Validate due date for partial payment
+                const dueDate = document.getElementById('due_date').value;
+                if (!dueDate) {
+                    e.preventDefault();
+                    alert('Please select a due date for partial payment');
+                    return;
+                }
+            }
+            
+            // Validate cheque payment
+            if (paymentMethod === 'Cheque') {
+                const dueDate = document.getElementById('due_date').value;
+                if (!dueDate) {
+                    e.preventDefault();
+                    alert('Please select a due date for cheque payment');
+                    return;
+                }
+            }
+            
+            // Create payment data object
+            const paymentData = {
+                payment_method: paymentMethod,
+                payment_details: paymentDetailsInput.value,
+                due_date: document.getElementById('due_date').value,
+                credit_description: document.getElementById('credit_description').value,
+                amount_paid: amountPaidInput.value
+            };
+            
+            // Add hidden field for payment data
+            let paymentDataField = document.getElementById('payment-data');
+            if (!paymentDataField) {
+                paymentDataField = document.createElement('input');
+                paymentDataField.type = 'hidden';
+                paymentDataField.id = 'payment-data';
+                paymentDataField.name = 'payment_data';
+                this.appendChild(paymentDataField);
+            }
+            paymentDataField.value = JSON.stringify(paymentData);
+            
+            // Update hidden fields with current data
+            cartData.value = JSON.stringify(cart);
+            tradeInData.value = JSON.stringify(tradeIns);
+            borrowedItemsData.value = JSON.stringify(borrowedItems);
+        });
+
+
+
+        
+        // Functions
+        function handleSearch() {
+            const searchTerm = itemSearch.value.toLowerCase();
+            const selectedCategory = categoryFilter.value;
+            const selectedType = typeFilter.value;
+            
+            // Show results even with empty search if filters are applied
+            if (searchTerm.length < 1 && !selectedCategory && !selectedType) {
+                customSelect.style.display = 'none';
+                return;
+            }
+            
+            // Filter inventory based on search term and filters
+            const filteredItems = inventory.filter(item => {
+                // Text search filter
+                const matchesSearch = searchTerm.length === 0 || (
+                    item.name.toLowerCase().includes(searchTerm) ||
+                    item.model_number.toLowerCase().includes(searchTerm) ||
+                    (item.imei_number && item.imei_number.toLowerCase().includes(searchTerm))
+                );
+                
+                // Category filter
+                const matchesCategory = !selectedCategory || item.category === selectedCategory;
+                
+                // Type filter (assuming you have a 'type' field in your inventory)
+                const matchesType = !selectedType || item.type === selectedType;
+                
+                // Only show items with quantity > 0
+                const hasStock = item.quantity > 0;
+                
+                return matchesSearch && matchesCategory && matchesType && hasStock;
+            });
+            
+            // Display results
+            if (filteredItems.length > 0) {
+                customSelect.innerHTML = '';
+                filteredItems.forEach(item => {
+                    const option = document.createElement('div');
+                    option.className = 'select-option';
+                    option.innerHTML = `
+                        <strong>${item.name}</strong>
+                        <span class="item-category-badge">${item.category}</span>
+                        ${item.type ? `<span class="item-category-badge">${item.type}</span>` : ''}
+                        <br>
+                        Model: ${item.model_number}
+                        ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
+                        <br>Available: ${item.quantity}
+                    `;
+                    option.addEventListener('click', () => {
+                        addToCart(item);
+                        customSelect.style.display = 'none';
+                        itemSearch.value = '';
+                        // Reset filters after selection (optional)
+                        // categoryFilter.value = '';
+                        // typeFilter.value = '';
+                    });
+                    customSelect.appendChild(option);
+                });
+                customSelect.style.display = 'block';
+            } else {
+                // Show "no results" message
+                customSelect.innerHTML = '<div class="select-option no-results">No items found matching your criteria</div>';
+                customSelect.style.display = 'block';
+            }
+        }
+        
+        function clearFilters() {
+            itemSearch.value = '';
+            categoryFilter.value = '';
+            typeFilter.value = '';
+            customSelect.style.display = 'none';
+        }
+
+
+
+        function addToCart(item) {
+            // Check if item is already in cart
+            const existingItem = cart.find(cartItem => cartItem.id === item.id);
+            
+            if (existingItem) {
+                // For phones with IMEI, don't allow quantity increase - each phone should be separate
+                if (item.category === 'Phone' && item.imei_number) {
+                    alert('Each phone must be added separately due to unique IMEI numbers.');
+                    return;
+                }
+                
+                // Increase quantity if already in cart (for non-phone items)
+                if (existingItem.quantity < item.quantity) {
+                    existingItem.quantity += 1;
+                    updateCartDisplay();
+                } else {
+                    alert('Cannot add more of this item. Maximum available quantity reached.');
+                }
+            } else {
+                // Add new item to cart
+                const newItem = {
+                    id: item.id,
+                    name: item.name,
+                    category: item.category,
+                    model_number: item.model_number,
+                    imei_number: item.imei_number || '',
+                    purchase_price: item.purchase_price,
+                    quantity: 1,
+                    sellingPrice: Math.ceil((item.purchase_price * 1.5) / 100) * 100, // Default 20% markup
+                    maxQuantity: item.category === 'Phone' ? 1 : item.quantity, // Phones can only have qty 1
+                    imei_required: item.category === 'Phone'
+                };
+                
+                cart.push(newItem);
+                updateCartDisplay();
+            }
+        }
+
+        
+        function updateCartDisplay() {
+            if (cart.length === 0 && tradeIns.length === 0 && borrowedItems.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartSummary.style.display = 'none';
+                customerInfo.style.display = 'none';
+                completeSaleBtn.disabled = true;
+                return;
+            }
+            
+            emptyCartMessage.style.display = 'none';
+            cartSummary.style.display = 'block';
+            customerInfo.style.display = 'block';
+            completeSaleBtn.disabled = false;
+            
+            // Clear current cart display
+            cartItemsList.innerHTML = '';
+            
+            // Add regular items
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                
+                // Build IMEI input field for phones
+                let imeiField = '';
+                if (item.category === 'Phone') {
+                    imeiField = `
+                        <label>IMEI:
+                            <input type="text" class="imei-input" pattern="[0-9]{15}"
+                                value="${item.imei_number || ''}"
+                                placeholder="Enter 15-digit IMEI"
+                                onchange="updateCartItemIMEI(${index}, this.value)"
+                                ${item.imei_number ? 'readonly' : 'required'}>
+                        </label>
+                    `;
+                }
+                
+                cartItem.innerHTML = `
+                    <div class="cart-item-details">
+                        <strong>${item.name}</strong> - ${item.category}<br>
+                        Model: ${item.model_number}
+                        ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
+                    </div>
+                    <div class="cart-item-actions">
+                        <label>Qty: 
+                            <input type="number" min="1" max="${item.maxQuantity}" value="${item.quantity}"
+                                onchange="updateCartItemQuantity(${index}, this.value)"
+                                ${item.category === 'Phone' ? 'readonly' : ''}>
+                        </label>
+                        <label>Price: Rs.
+                            <input type="number" class="selling-price-input" min="${item.purchase_price}"
+                                value="${item.sellingPrice}" step="0.01"
+                                onchange="updateCartItemPrice(${index}, this.value)">
+                        </label>
+                        ${imeiField}
+                        <span class="remove-item" onclick="removeFromCart(${index})">✕</span>
+                    </div>
+                `;
+                cartItemsList.appendChild(cartItem);
+            });
+            
+            // Add trade-in items
+            tradeIns.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item trade-in-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-details">
+                        <span class="item-type-badge trade-in-badge">Trade-in</span>
+                        <strong>${item.name}</strong><br>
+                        Model: ${item.model_number}
+                        <br>IMEI: ${item.imei_number}
+                    </div>
+                    <div class="cart-item-actions">
+                        <label>Value: Rs.
+                            <input type="number" class="selling-price-input" min="0"
+                                value="${item.trade_in_value}" step="0.01"
+                                onchange="updateTradeInValue(${index}, this.value)">
+                        </label>
+                        <span class="remove-item" onclick="removeTradeIn(${index})">✕</span>
+                    </div>
+                `;
+                cartItemsList.appendChild(cartItem);
+            });
+            
+            // Add borrowed items
+            borrowedItems.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item borrowed-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-details">
+                        <span class="item-type-badge borrowed-badge">Borrowed</span>
+                        <strong>${item.name}</strong> - ${item.category}<br>
+                        Model: ${item.model_number}
+                        ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
+                    </div>
+                    <div class="cart-item-actions">
+                        <label>Qty: 
+                            <input type="number" min="1" value="${item.quantity}"
+                                onchange="updateBorrowedItemQuantity(${index}, this.value)"
+                                ${item.category === 'Phone' ? 'readonly' : ''}>
+                        </label>
+                        <label>Cost: Rs.
+                            <input type="number" min="0" value="${item.purchase_price}" step="0.01"
+                                onchange="updateBorrowedItemCost(${index}, this.value)">
+                        </label>
+                        <label>Price: Rs.
+                            <input type="number" min="0" value="${item.selling_price}" step="0.01"
+                                onchange="updateBorrowedItemPrice(${index}, this.value)">
+                        </label>
+                        <span class="remove-item" onclick="removeBorrowedItem(${index})">✕</span>
+                    </div>
+                `;
+                cartItemsList.appendChild(cartItem);
+            });
+            
+            // Update total
+            updateCartTotal();
+        }
+
+        // Add function to reset borrowed item form
+        function resetBorrowedItemForm() {
+            document.getElementById('borrowed-name').value = '';
+            document.getElementById('borrowed-phone').checked = false;
+            document.getElementById('borrowed-accessory').checked = false;
+            document.getElementById('borrowed-model').value = '';
+            document.getElementById('borrowed-imei').value = '';
+            document.getElementById('borrowed-supplier').value = '';
+            document.getElementById('borrowed-cost').value = '';
+            document.getElementById('borrowed-selling').value = '';
+            document.getElementById('borrowed-quantity').value = '1';
+            document.getElementById('borrowed-imei-group').style.display = 'none';
+            document.getElementById('borrowed-imei').required = false;
+            document.getElementById('borrowed-quantity').readOnly = false;
+        }
+
+        function updateCartItemIMEI(index, imei) {
+            // Validate IMEI format (15 digits)
+            if (imei && !/^[0-9]{15}$/.test(imei)) {
+                alert('IMEI must be exactly 15 digits');
+                return;
+            }
+            
+            cart[index].imei_number = imei;
+            updateCartDisplay();
+        }
+
+        
+        function updateCartTotal() {
+            let total = 0;
+            
+            // Add regular items
+            cart.forEach(item => {
+                total += item.quantity * item.sellingPrice;
+            });
+            
+            // Subtract trade-in values
+            tradeIns.forEach(item => {
+                total -= parseFloat(item.trade_in_value);
+            });
+            
+            // Add borrowed items
+            borrowedItems.forEach(item => {
+                total += item.quantity * item.selling_price;
+            });
+            
+            cartTotal.textContent = `Rs.${total.toFixed(2)}`;
+        }
+        
+        function updateCartItemQuantity(index, quantity) {
+            cart[index].quantity = parseInt(quantity);
+            updateCartDisplay();
+        }
+        
+        function updateCartItemPrice(index, price) {
+            cart[index].sellingPrice = parseFloat(price);
+            updateCartDisplay();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        function updateTradeInValue(index, value) {
+            tradeIns[index].trade_in_value = parseFloat(value);
+            updateCartDisplay();
+        }
+        
+        function removeTradeIn(index) {
+            tradeIns.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        function updateBorrowedItemQuantity(index, quantity) {
+            borrowedItems[index].quantity = parseInt(quantity);
+            updateCartDisplay();
+        }
+        
+        function updateBorrowedItemCost(index, cost) {
+            borrowedItems[index].purchase_price = parseFloat(cost);
+            updateCartDisplay();
+        }
+        
+        function updateBorrowedItemPrice(index, price) {
+            borrowedItems[index].selling_price = parseFloat(price);
+            updateCartDisplay();
+        }
+        
+        function removeBorrowedItem(index) {
+            borrowedItems.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        function addTradeInToTransaction() {
+            const name = document.getElementById('trade-in-name').value;
+            const model = document.getElementById('trade-in-model').value;
+            const imei = document.getElementById('trade-in-imei').value;
+            const type = document.getElementById('trade-in-type').value;
+            const price = document.getElementById('trade-in-price').value;
+            
+            if (!name || !model || !imei || !price) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Add to trade-ins array
+            const tradeIn = {
+                name: name,
+                model_number: model,
+                imei_number: imei,
+                type: type,
+                trade_in_value: parseFloat(price)
+            };
+            
+            // Send to server to validate
+            fetch('/add_trade_in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(tradeIn)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    tradeIns.push(tradeIn);
+                    updateCartDisplay();
+                    
+                    // Reset form and close modal
+                    document.getElementById('trade-in-name').value = '';
+                    document.getElementById('trade-in-model').value = '';
+                    document.getElementById('trade-in-imei').value = '';
+                    document.getElementById('trade-in-price').value = '';
+                    tradeInModal.style.display = 'none';
+                } else {
+                    alert('Error adding trade-in: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing the trade-in');
+            });
+        }
+        
+        function handleBorrowedCategoryChange(checkbox) {
+            const phoneCheckbox = document.getElementById('borrowed-phone');
+            const accessoryCheckbox = document.getElementById('borrowed-accessory');
+            const imeiGroup = document.getElementById('borrowed-imei-group');
+            const imeiInput = document.getElementById('borrowed-imei');
+            const quantityInput = document.getElementById('borrowed-quantity');
+            
+            // Only allow one category to be selected at a time
+            if (checkbox.checked) {
+                if (checkbox.id === 'borrowed-phone') {
+                    accessoryCheckbox.checked = false;
+                    // Show IMEI field for phones
+                    imeiGroup.style.display = 'block';
+                    imeiInput.required = true;
+                    // Set quantity to 1 for phones and make it readonly
+                    quantityInput.value = 1;
+                    quantityInput.readOnly = true;
+                } else if (checkbox.id === 'borrowed-accessory') {
+                    phoneCheckbox.checked = false;
+                    // Hide IMEI field for accessories
+                    imeiGroup.style.display = 'none';
+                    imeiInput.required = false;
+                    imeiInput.value = '';
+                    // Allow quantity changes for accessories
+                    quantityInput.readOnly = false;
+                }
+            } else {
+                // If unchecked, hide IMEI field and reset
+                imeiGroup.style.display = 'none';
+                imeiInput.required = false;
+                imeiInput.value = '';
+                quantityInput.readOnly = false;
+            }
+        }
+
+        function addBorrowedItemToTransaction() {
+            const name = document.getElementById('borrowed-name').value;
+            const phoneCheckbox = document.getElementById('borrowed-phone');
+            const accessoryCheckbox = document.getElementById('borrowed-accessory');
+            const model = document.getElementById('borrowed-model').value;
+            const imei = document.getElementById('borrowed-imei').value;
+            const supplier = document.getElementById('borrowed-supplier').value;
+            const cost = document.getElementById('borrowed-cost').value;
+            const selling = document.getElementById('borrowed-selling').value;
+            const quantity = document.getElementById('borrowed-quantity').value;
+            
+            // Determine category
+            let category = '';
+            if (phoneCheckbox.checked) {
+                category = 'Phone';
+            } else if (accessoryCheckbox.checked) {
+                category = 'Accessory';
+            }
+            
+            if (!name || !category || !model || !cost || !selling || !quantity) {
+                alert('Please fill in all required fields and select a category');
+                return;
+            }
+            
+            // Validate IMEI for phones
+            if (category === 'Phone') {
+                if (!imei || !/^[0-9]{15}$/.test(imei)) {
+                    alert('Please enter a valid 15-digit IMEI number for phones');
+                    return;
+                }
+            }
+            
+            // Add to borrowed items array
+            const borrowedItem = {
+                name: name,
+                category: category,
+                model_number: model,
+                imei_number: category === 'Phone' ? imei : null,
+                supplier: supplier,
+                purchase_price: parseFloat(cost),
+                selling_price: parseFloat(selling),
+                quantity: parseInt(quantity)
+            };
+            
+            // Send to server to validate
+            fetch('/add_borrowed_item', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(borrowedItem)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    borrowedItems.push(borrowedItem);
+                    updateCartDisplay();
+                    
+                    // Reset form and close modal
+                    resetBorrowedItemForm();
+                    borrowedItemModal.style.display = 'none';
+                } else {
+                    alert('Error adding borrowed item: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing the borrowed item');
+            });
+        }
+
+
+        // Function to fetch receipt data for a specific sale
+        function fetchReceiptData(saleId, customerName, customerPhone, saleDate) {
+            // Show loading indicator
+            receiptContent.innerHTML = '<div class="loading">Loading receipt data...</div>';
+            receiptModal.style.display = 'block';
+            
+            // Fetch all sales for the same customer on the same date
+            fetch(`/get_receipt_data?sale_id=${saleId}&customer=${encodeURIComponent(customerName)}&phone=${encodeURIComponent(customerPhone)}&date=${encodeURIComponent(saleDate.split(' ')[0])}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        receiptContent.innerHTML = `<div class="error">${data.error}</div>`;
+                        return;
+                    }
+
+                    // Render the receipt
+                    renderReceipt(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching receipt data:', error);
+                    receiptContent.innerHTML = '<div class="error">Failed to load receipt data. Please try again.</div>';
+                });
+        }
+        
+        // Function to render the receipt with the data
+        function renderReceipt(data) {
+            const sale = data.sale;
+            const items = data.items;
+            const tradeIns = data.trade_ins;
+            const borrowedItems = data.borrowed_items;
+            
+            // Format the date
+            const saleDate = new Date(sale.sale_date);
+            const formattedDate = saleDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            // Calculate totals
+            let subtotal = 0;
+            items.forEach(item => {
+                subtotal += item.quantity * item.selling_price;
+            });
+            
+            borrowedItems.forEach(item => {
+                subtotal += item.quantity * item.selling_price;
+            });
+            
+            let tradeInTotal = 0;
+            tradeIns.forEach(item => {
+                tradeInTotal += parseFloat(item.trade_in_value);
+            });
+            
+            const total = subtotal - tradeInTotal;
+            
+            // Build receipt HTML
+            let receiptHTML = `
+                <div class="receipt-header">
+                    <h2>Mobile Shop</h2>
+                    <p>123 Main Street, City</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+                
+                <div class="receipt-info">
+                    <p><strong>Receipt #:</strong> ${sale.id}</p>
+                    <p><strong>Date:</strong> ${formattedDate}</p>
+                    <p><strong>Customer:</strong> ${sale.customer_name}</p>
+                    <p><strong>Phone:</strong> ${sale.customer_phone}</p>
+                </div>
+                
+                <div class="receipt-items">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            // Add regular items
+            items.forEach(item => {
+                const itemTotal = item.quantity * item.selling_price;
+                receiptHTML += `
+                    <tr>
+                        <td>${item.name} (${item.model_number})</td>
+                        <td>${item.quantity}</td>
+                        <td>Rs.${item.selling_price.toFixed(2)}</td>
+                        <td>Rs.${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+            
+            // Add borrowed items
+            borrowedItems.forEach(item => {
+                const itemTotal = item.quantity * item.selling_price;
+                receiptHTML += `
+                    <tr>
+                        <td>${item.name} (${item.model_number}) [Borrowed]</td>
+                        <td>${item.quantity}</td>
+                        <td>Rs.${item.selling_price.toFixed(2)}</td>
+                        <td>Rs.${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+            
+            // Add trade-ins
+            tradeIns.forEach(item => {
+                receiptHTML += `
+                    <tr class="trade-in-row">
+                        <td>Trade-in: ${item.name} (${item.model_number})</td>
+                        <td>1</td>
+                        <td>-Rs.${parseFloat(item.trade_in_value).toFixed(2)}</td>
+                        <td>-Rs.${parseFloat(item.trade_in_value).toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+            
+            // Add totals
+            receiptHTML += `
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"><strong>Subtotal:</strong></td>
+                                <td>Rs.${subtotal.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong>Trade-in Credit:</strong></td>
+                                <td>-Rs.${tradeInTotal.toFixed(2)}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="3"><strong>Total:</strong></td>
+                                <td>Rs.${total.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+                <div class="receipt-footer">
+                    <p>Thank you for your business!</p>
+                    <p>All sales are final. Warranty information provided separately.</p>
+                </div>
+            `;
+            
+            // Update the receipt content
+            receiptContent.innerHTML = receiptHTML;
+        }
+
+        // Payment Method Handling
+        const paymentMethodSelect = document.getElementById('payment_method');
+        const paymentDetailsGroup = document.getElementById('payment-details-group');
+        const paymentDetailsInput = document.getElementById('payment_details');
+        const partialPaymentRow = document.getElementById('partial-payment-row');
+        const amountPaidInput = document.getElementById('amount_paid');
+        const remainingAmountInput = document.getElementById('remaining_amount');
+
+        // Add event listener for payment method changes
+        paymentMethodSelect.addEventListener('change', handlePaymentMethodChange);
+        amountPaidInput.addEventListener('input', calculateRemainingAmount);
+
+        function handlePaymentMethodChange() {
+            const selectedMethod = paymentMethodSelect.value;
+            
+            // Reset fields
+            paymentDetailsGroup.style.display = 'none';
+            partialPaymentRow.style.display = 'none';
+            document.getElementById('due-date-row').style.display = 'none'; // Add this line
+            paymentDetailsInput.required = false;
+            amountPaidInput.required = false;
+            document.getElementById('due_date').required = false; // Add this line
+            
+            // Show relevant fields based on payment method
+            switch(selectedMethod) {
+                case 'Card':
+                    paymentDetailsGroup.style.display = 'block';
+                    paymentDetailsInput.placeholder = 'Last 4 digits of card';
+                    paymentDetailsInput.required = true;
+                    break;
+                case 'UPI':
+                    paymentDetailsGroup.style.display = 'block';
+                    paymentDetailsInput.placeholder = 'UPI Transaction ID';
+                    paymentDetailsInput.required = true;
+                    break;
+                case 'Bank Transfer':
+                    paymentDetailsGroup.style.display = 'block';
+                    paymentDetailsInput.placeholder = 'Transaction Reference';
+                    paymentDetailsInput.required = true;
+                    break;
+                case 'Cheque':
+                    paymentDetailsGroup.style.display = 'block';
+                    paymentDetailsInput.placeholder = 'Cheque Number';
+                    paymentDetailsInput.required = true;
+                    // Show due date for cheque
+                    document.getElementById('due-date-row').style.display = 'block';
+                    document.getElementById('due_date').required = true;
+                    setMinDueDate();
+                    break;
+                case 'Partial Payment':
+                    partialPaymentRow.style.display = 'block';
+                    amountPaidInput.required = true;
+                    // Show due date for partial payment
+                    document.getElementById('due-date-row').style.display = 'block';
+                    document.getElementById('due_date').required = true;
+                    setMinDueDate();
+                    calculateRemainingAmount();
+                    break;
+                case 'Cash':
+                default:
+                    // No additional fields needed for cash
+                    break;
+            }
+        }
+
+        function calculateRemainingAmount() {
+            const totalAmount = parseFloat(cartTotal.textContent.replace('Rs.', '')) || 0;
+            const paidAmount = parseFloat(amountPaidInput.value) || 0;
+            const remaining = totalAmount - paidAmount;
+            
+            remainingAmountInput.value = remaining.toFixed(2);
+            
+            // Validate that paid amount doesn't exceed total
+            if (paidAmount > totalAmount) {
+                amountPaidInput.setCustomValidity('Amount paid cannot exceed total amount');
+            } else if (paidAmount < 0) {
+                amountPaidInput.setCustomValidity('Amount paid cannot be negative');
+            } else {
+                amountPaidInput.setCustomValidity('');
+            }
+        }
+
+        // Update the cart total calculation to also update remaining amount for partial payments
+        function updateCartTotal() {
+            let total = 0;
+            
+            // Add regular items
+            cart.forEach(item => {
+                total += item.quantity * item.sellingPrice;
+            });
+            
+            // Subtract trade-in values
+            tradeIns.forEach(item => {
+                total -= parseFloat(item.trade_in_value);
+            });
+            
+            // Add borrowed items
+            borrowedItems.forEach(item => {
+                total += item.quantity * item.selling_price;
+            });
+            
+            cartTotal.textContent = `Rs.${total.toFixed(2)}`;
+            
+            // Update remaining amount if partial payment is selected
+            if (paymentMethodSelect.value === 'Partial Payment') {
+                calculateRemainingAmount();
+            }
+        }
+
+        // Add these functions to your JavaScript section
+
+        function setMinDueDate() {
+            const dueDateInput = document.getElementById('due_date');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            // Set minimum date to tomorrow
+            dueDateInput.min = tomorrow.toISOString().split('T')[0];
+            
+            // Set default to 30 days from today
+            const defaultDate = new Date(today);
+            defaultDate.setDate(defaultDate.getDate() + 30);
+            dueDateInput.value = defaultDate.toISOString().split('T')[0];
+        }
+
+        function askPassword(event) {
+                event.preventDefault(); // prevent the default link action
+                const password = prompt("Enter admin password:");
+                if (password === "admin123") {
+                    window.location.href = "{{ url_for('index') }}"; // redirect if correct
+                } else if (password !== null) {
+                    alert("Incorrect password.");
+                }
+        }
+
+        // Update the form validation in the form submission event listener
+
+
+    </script>
+</body>
+</html>
+

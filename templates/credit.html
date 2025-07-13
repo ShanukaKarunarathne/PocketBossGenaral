@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Boss</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo2.PNG') }}" type="image/jpeg">  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            --text-muted: #6c757d;
+            --shadow: 0 2px 10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+            --light-green: #d4edda;
+            --light-red: #f8d7da;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+        }
+
+        .main-header {
+            background: var(--white);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .main-header h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .btn-custom {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary-custom {
+            background-color: var(--text-muted);
+            color: var(--white);
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .summary-card {
+            background: var(--white);
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .summary-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .summary-card h5 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .summary-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .summary-total {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .summary-pending {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .summary-overdue {
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .summary-collected {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .filter-card {
+            background: var(--white);
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .filter-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .form-select, .form-control {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus, .form-control:focus {
+            border-color: var(--success-color);
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .credit-card {
+            background: var(--white);
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .credit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .credit-card.paid {
+            border-left-color: var(--success-color);
+            background-color: var(--light-green);
+        }
+
+        .credit-card.overdue {
+            background-color: var(--light-red);
+        }
+
+        .credit-card .card-header {
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.25rem;
+        }
+
+        .credit-card.paid .card-header {
+            background: var(--light-green);
+        }
+
+        .credit-card.overdue .card-header {
+            background: var(--light-red);
+        }
+
+        .credit-card .card-header h6 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .credit-card .card-body {
+            padding: 1.25rem;
+        }
+
+        .credit-card .card-footer {
+            background: var(--light-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 1.25rem;
+        }
+
+        .credit-card.paid .card-footer {
+            background: var(--light-green);
+        }
+
+        .credit-card.overdue .card-footer {
+            background: var(--light-red);
+        }
+
+        .badge-custom {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-success-custom {
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+
+        .badge-danger-custom {
+            background-color: var(--danger-color);
+            color: var(--white);
+        }
+
+        .badge-warning-custom {
+            background-color: var(--warning-color);
+            color: var(--primary-color);
+        }
+
+        .badge-info-custom {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .payment-history-item {
+            background: var(--light-green);
+            border-left: 3px solid var(--success-color);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .btn-details {
+            background-color: var(--white);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-details:hover {
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-pay {
+            background-color: var(--success-color);
+            border: none;
+            color: var(--white);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pay:hover {
+            background-color: #218838;
+            color: var(--white);
+            transform: translateY(-1px);
+        }
+
+        .modal-header-custom {
+            background-color: var(--success-color);
+            color: var(--white);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .currency {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .currency.danger {
+            color: var(--danger-color);
+        }
+
+        .currency.success {
+            color: var(--success-color);
+        }
+
+        .info-row {
+            margin-bottom: 1rem;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .items-preview {
+            background: var(--light-bg);
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-clear {
+            background-color: var(--white);
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            border-radius: 8px;
+        }
+
+        .btn-clear:hover {
+            background-color: var(--text-muted);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 1rem 0;
+            }
+            
+            .main-header .d-flex {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .summary-card .card-body {
+                padding: 1rem;
+            }
+            
+            .credit-card .card-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><i class="fas fa-credit-card me-2"></i>Credit Management</h2>
+                <div>
+                    <button class="btn btn-custom btn-primary-custom me-2" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <a href="{{ url_for('index') }}" class="btn btn-custom btn-secondary-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card summary-card summary-total">
+                    <div class="card-body text-center">
+                        <h5>Total Credits</h5>
+                        <h3>{{ credits|length }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card summary-card summary-pending">
+                    <div class="card-body text-center">
+                        <h5>Pending Amount</h5>
+                        <h3>Rs. {{ "%.2f"|format(total_pending) }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card summary-card summary-overdue">
+                    <div class="card-body text-center">
+                        <h5>Overdue</h5>
+                        <h3>{{ overdue_count }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card summary-card summary-collected">
+                    <div class="card-body text-center">
+                        <h5>This Month Collected</h5>
+                        <h3>Rs. {{ "%.2f"|format(month_collected) }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Options -->
+        <div class="card filter-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <select class="form-select" id="statusFilter" onchange="filterCredits()">
+                            <option value="pending">Unpaid Only</option>
+                            <option value="">All Status</option>
+                            <option value="paid">Paid Only</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <select class="form-select" id="dueDateFilter" onchange="filterCredits()">
+                            <option value="">All Due Dates</option>
+                            <option value="overdue">Overdue</option>
+                            <option value="due_soon">Due Soon (7 days)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <input type="text" class="form-control" id="searchCustomer" placeholder="Search by customer name or phone" onkeyup="filterCredits()">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-clear w-100" onclick="clearFilters()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Cards -->
+        <div class="row" id="creditContainer">
+            {% for credit in credits %}
+            <div class="col-md-6 col-lg-4 mb-4 credit-item"
+                 data-status="{{ credit.status }}"
+                 data-customer="{{ credit.customer_name.lower() }} {{ credit.customer_phone }}"
+                 data-due-status="{{ credit.due_status }}">
+                <div class="card credit-card h-100 {{ 'paid' if credit.status == 'paid' else '' }} {{ 'overdue' if credit.due_status == 'overdue' else '' }}">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">
+                            <i class="fas fa-user me-2"></i>{{ credit.customer_name }}
+                        </h6>
+                        <span class="badge badge-custom {{ 'badge-success-custom' if credit.status == 'paid' else 'badge-danger-custom' }}">
+                            {{ credit.status.title() }}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row info-row">
+                            <div class="col-6">
+                                <div class="info-label">Phone:</div>
+                                <div class="info-value">{{ credit.customer_phone }}</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info-label">Credit Amount:</div>
+                                <div class="info-value currency danger">Rs. {{ "%.2f"|format(credit.credit_amount) }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row info-row">
+                            <div class="col-6">
+                                <div class="info-label">Total Amount:</div>
+                                <div class="info-value currency">Rs. {{ "%.2f"|format(credit.total_amount) }}</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info-label">Cash Paid:</div>
+                                <div class="info-value currency success">Rs. {{ "%.2f"|format(credit.cash_amount) }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row info-row">
+                            <div class="col-12">
+                                <div class="info-label">Due Date:</div>
+                                <span class="badge badge-custom {{ 'badge-danger-custom' if credit.due_status == 'overdue' else 'badge-warning-custom' if credit.due_status == 'due_soon' else 'badge-info-custom' }}">
+                                    {{ credit.due_date }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        {% if credit.description %}
+                        <div class="info-row">
+                            <div class="info-label">Description:</div>
+                            <div class="info-value">{{ credit.description }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Payment History -->
+                        {% if credit.payment_history %}
+                        <div class="info-row">
+                            <div class="info-label">Payment History:</div>
+                            {% for payment in credit.payment_history %}
+                            <div class="payment-history-item">
+                                <small>
+                                    <strong>Rs. {{ "%.2f"|format(payment.amount) }}</strong> - {{ payment.date }}
+                                    {% if payment.method %}<br><em>{{ payment.method }}</em>{% endif %}
+                                </small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-details flex-fill"
+                                     onclick="viewDetails('{{ credit.id }}')">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            {% if credit.status == 'pending' %}
+                            <button class="btn btn-pay flex-fill"
+                                     onclick="markAsPaid('{{ credit.id }}')">
+                                <i class="fas fa-check"></i> Mark Paid
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if not credits %}
+        <div class="empty-state">
+            <i class="fas fa-credit-card"></i>
+            <h4>No credit records found</h4>
+            <p>Credit transactions will appear here when customers make purchases on credit.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Credit Details Modal -->
+    <div class="modal fade" id="creditDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title"><i class="fas fa-receipt me-2"></i>Credit Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="creditDetailsContent">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title"><i class="fas fa-money-bill-wave me-2"></i>Record Payment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="paymentForm">
+                    <div class="modal-body">
+                        <input type="hidden" id="creditId" name="credit_id">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Payment Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rs.</span>
+                                <input type="number" class="form-control" id="paymentAmount" name="payment_amount" step="0.01" required>
+                            </div>
+                            <div class="form-text">Remaining amount: Rs. <span id="remainingAmount">0.00</span></div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-select" id="paymentMethod" name="payment_method" required>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Cheque">Cheque</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Payment Details (Optional)</label>
+                            <input type="text" class="form-control" id="paymentDetails" name="payment_details" placeholder="Transaction ID, Cheque number, etc.">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Notes (Optional)</label>
+                            <textarea class="form-control" id="paymentNotes" name="payment_notes" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-pay">Record Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize page with unpaid credits only
+        document.addEventListener('DOMContentLoaded', function() {
+            filterCredits();
+        });
+
+        function filterCredits() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dueDateFilter = document.getElementById('dueDateFilter').value;
+            const searchTerm = document.getElementById('searchCustomer').value.toLowerCase();
+            
+            const creditItems = document.querySelectorAll('.credit-item');
+            
+            creditItems.forEach(item => {
+                const status = item.getAttribute('data-status');
+                const customer = item.getAttribute('data-customer');
+                const dueStatus = item.getAttribute('data-due-status');
+                
+                let showItem = true;
+                
+                // Filter by status
+                if (statusFilter && status !== statusFilter) {
+                    showItem = false;
+                }
+                
+                // Filter by due date
+                if (dueDateFilter) {
+                    if (dueDateFilter === 'overdue' && dueStatus !== 'overdue') {
+                        showItem = false;
+                    } else if (dueDateFilter === 'due_soon' && dueStatus !== 'due_soon') {
+                        showItem = false;
+                    }
+                }
+                
+                // Filter by search term
+                if (searchTerm && !customer.includes(searchTerm)) {
+                    showItem = false;
+                }
+                
+                item.style.display = showItem ? 'block' : 'none';
+            });
+        }
+        
+        function clearFilters() {
+            document.getElementById('statusFilter').value = 'pending';
+            document.getElementById('dueDateFilter').value = '';
+            document.getElementById('searchCustomer').value = '';
+            filterCredits();
+        }
+        
+        function refreshData() {
+            location.reload();
+        }
+        
+        function viewDetails(creditId) {
+            fetch(`/credit_details/${creditId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('creditDetailsContent').innerHTML = html;
+                    new bootstrap.Modal(document.getElementById('creditDetailsModal')).show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error loading credit details');
+                });
+        }
+        
+        function markAsPaid(creditId) {
+            fetch(`/get_credit/${creditId}`)
+                .then(response => response.json())
+                .then(credit => {
+                    document.getElementById('creditId').value = creditId;
+                    document.getElementById('paymentAmount').value = credit.credit_amount;
+                    document.getElementById('remainingAmount').textContent = credit.credit_amount.toFixed(2);
+                    new bootstrap.Modal(document.getElementById('paymentModal')).show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error loading credit information');
+                });
+        }
+        
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/record_payment', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Payment recorded successfully!');
+                    location.reload();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error recording payment');
+            });
+        });
+        
+        // Update remaining amount when payment amount changes
+        document.getElementById('paymentAmount').addEventListener('input', function() {
+            const paymentAmount = parseFloat(this.value) || 0;
+            const creditAmount = parseFloat(document.getElementById('remainingAmount').textContent);
+            const remaining = Math.max(0, creditAmount - paymentAmount);
+            
+            if (paymentAmount > creditAmount) {
+                this.setCustomValidity('Payment amount cannot exceed remaining amount');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+    </script>
+</body>
+</html>

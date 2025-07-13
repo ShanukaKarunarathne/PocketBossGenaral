@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Boss</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo2.PNG') }}" type="image/jpeg">    
+</head>
+<style>
+    /* Modern CSS Reset & Base */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --secondary: #f8fafc;
+        --accent: #10b981;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border: #e2e8f0;
+        --white: #ffffff;
+        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --radius: 0.75rem;
+        --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    header h1 {
+        text-align: center;
+        padding: 2rem 0 1rem;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius);
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+        position: relative;
+    }
+
+    nav a:hover,
+    nav a.active {
+        color: var(--primary);
+        background: rgba(99, 102, 241, 0.1);
+    }
+
+    /* Main Content */
+    main {
+        padding: 2rem 0;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .quick-actions h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: var(--white);
+        padding: 1rem 2rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        border: none;
+        cursor: pointer;
+        min-width: 160px;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Dashboard */
+    .dashboard h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: var(--text-primary);
+    }
+
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .card {
+        background: var(--white);
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid var(--border);
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 1rem 0;
+    }
+
+    .subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+
+    /* Dashboard Sections */
+    .dashboard-sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .recent-activity,
+    .alerts {
+        background: var(--white);
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+    }
+
+    .recent-activity h3,
+    .alerts h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--border);
+    }
+
+    /* Tables */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .data-table th {
+        background: var(--secondary);
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .data-table tr:hover {
+        background: rgba(99, 102, 241, 0.05);
+    }
+
+    .data-table .amount {
+        font-size: 1rem;
+        text-align: right;
+        font-weight: 600;
+    }
+
+    /* Alert States */
+    .critical {
+        background: rgba(239, 68, 68, 0.1);
+        border-left: 4px solid #ef4444;
+    }
+
+    .warning {
+        background: rgba(245, 158, 11, 0.1);
+        border-left: 4px solid #f59e0b;
+    }
+
+    .no-data {
+        text-align: center;
+        color: var(--text-secondary);
+        padding: 3rem;
+        font-style: italic;
+    }
+
+    .view-all {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 1rem;
+        transition: var(--transition);
+    }
+
+    .view-all:hover {
+        color: var(--primary-dark);
+    }
+
+    /* Add this to your existing CSS */
+.blessing-banner {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.blessing-banner .arabic-text {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    font-family: 'Amiri', 'Times New Roman', serif;
+}
+
+.blessing-banner .english-text {
+    font-size: 1.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-style: italic;
+}
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 2rem 0;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--border);
+        margin-top: 4rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 1rem;
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+            padding: 1.5rem 0 1rem;
+        }
+        
+        nav ul {
+            flex-direction: column;
+            gap: 0.25rem;
+            padding-bottom: 1rem;
+        }
+        
+        nav a {
+            text-align: center;
+        }
+        
+        .dashboard-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .dashboard-sections {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .btn {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .amount {
+            font-size: 2rem;
+        }
+        
+        .data-table {
+            font-size: 0.875rem;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .dashboard-sections {
+            grid-template-columns: 1fr;
+        }
+        
+        .recent-activity,
+        .alerts {
+            padding: 1.5rem;
+        }
+        
+        .card {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Loading Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card,
+    .recent-activity,
+    .alerts {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .lite-button {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        padding: 8px 16px;
+        border: 2px solid green;
+        background-color: white;
+        color: green;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .lite-button:hover {
+        background-color: green;
+        color: white;
+    }
+
+
+</style>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pocket Boss</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
+                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+                    <li><a href="{{ url_for('sales2') }}">Sales</a></li>
+                    <li><a href="{{ url_for('expenses') }}">Expenses</a></li>
+                    <li><a href="{{ url_for('reports') }}">Reports</a></li>
+                </ul>
+                <a href="{{ url_for('sales') }}" class="lite-button">Lite</a>
+            </nav>
+
+        </header>
+        
+        <main>
+            <section class="dashboard">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Today's Sales</h3>
+                        <p class="amount">Rs. {{ "%.2f"|format(summary.sales_amount) }}</p>
+                        <p class="subtitle">{{ summary.sales_count }} items sold</p>
+                    </div>
+                    <div class="card">
+                        <h3>Today's Expenses</h3>
+                        <p class="amount">Rs. {{ "%.2f"|format(summary.expenses) }}</p>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <a href="{{ url_for('inventory') }}" class="btn">Add Items</a>
+                        <a href="{{ url_for('sales') }}" class="btn">Bill</a>
+                        <a href="{{ url_for('expenses') }}" class="btn">Add Expense</a>
+                        <a href="{{ url_for('reports') }}" class="btn">View Reports</a>
+                        <a href="{{ url_for('credits') }}" class="btn">View credit</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-sections">
+                <section class="recent-activity">
+                    <h3>Recent Sales</h3>
+                    {% if recent_sales %}
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Item</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sale in recent_sales %}
+                            <tr>
+                                <td>{{ sale.date }}</td>
+                                <td>{{ sale.customer_name }}</td>
+                                <td>{{ sale.item_name }}</td>
+                                <td class="amount">Rs. {{ "%.2f"|format(sale.total_price) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p class="no-data">No recent sales</p>
+                    {% endif %}
+                    <a href="{{ url_for('sales') }}" class="view-all">View All Sales</a>
+                </section>
+
+                <section class="recent-activity">
+                    <h3>Recent Expenses</h3>
+                    {% if recent_expenses %}
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for expense in recent_expenses %}
+                            <tr>
+                                <td>{{ expense.date }}</td>
+                                <td>{{ expense.category }}</td>
+                                <td>{{ expense.description }}</td>
+                                <td class="amount">Rs. {{ "%.2f"|format(expense.amount) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p class="no-data">No recent expenses</p>
+                    {% endif %}
+                    <a href="{{ url_for('expenses') }}" class="view-all">View All Expenses</a>
+                </section>
+            </div>
+
+            <section class="alerts">
+                <h3>Low Stock Alerts</h3>
+                {% if low_stock %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Model</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in low_stock %}
+                        <tr class="{% if item.quantity <= 2 %}critical{% else %}warning{% endif %}">
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>{{ item.model_number }}</td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="no-data">No low stock items</p>
+                {% endif %}
+                <a href="{{ url_for('inventory') }}" class="view-all">Manage Inventory</a>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; {{ summary.date.split('-')[0] }} Pocket Boss</p>
+            <p>Contact - 070-1272525</p>
+        </footer>
+    </div>
+</body>
+</html>

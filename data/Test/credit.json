@@ -1,0 +1,154 @@
+{
+    "credits": [
+        {
+            "id": "cf71243c-271e-4cfe-9f59-be109db82199",
+            "date": "2025-07-10 16:50:24",
+            "customer_name": "Shanuka",
+            "customer_phone": "0701272525",
+            "total_amount": 1000.0,
+            "credit_amount": 1000.0,
+            "cash_amount": 0.0,
+            "due_date": "2025-08-16",
+            "description": "Cheque payment - 942097",
+            "status": "paid",
+            "sale_items": [
+                {
+                    "id": "a2e2b646-a33a-425f-a204-febaee3e2bfd",
+                    "customer_name": "Shanuka",
+                    "customer_phone": "0701272525",
+                    "item_id": "014f0157-0af8-4d6e-b874-0428ef76ebf0",
+                    "item_name": "iphone 11 pro",
+                    "category": "Back Cover",
+                    "model_number": "evo clear",
+                    "imei_number": "",
+                    "quantity": 1,
+                    "unit_price": 1000,
+                    "total_price": 1000,
+                    "profit": 600.0,
+                    "date": "2025-07-10 16:50:24",
+                    "type": "regular",
+                    "payment_method": "Cheque",
+                    "payment_details": "942097",
+                    "credit_amount": 1000.0,
+                    "cash_amount": 0.0
+                }
+            ],
+            "payment_history": [
+                {
+                    "date": "2025-07-10 23:49:13",
+                    "amount": 1000.0,
+                    "method": "Cash",
+                    "details": "",
+                    "notes": ""
+                }
+            ]
+        },
+        {
+            "id": "4eaa0ae6-e1cf-4328-bc89-a6478226c4e8",
+            "date": "2025-07-10 17:10:43",
+            "customer_name": "test",
+            "customer_phone": "0701234567",
+            "total_amount": 1000.0,
+            "credit_amount": 700.0,
+            "cash_amount": 300.0,
+            "due_date": "2025-08-17",
+            "description": "Partial payment - Remaining amount for test",
+            "status": "paid",
+            "sale_items": [
+                {
+                    "id": "fa2fb79a-7c56-4aa9-bb82-8c740a6edb3d",
+                    "customer_name": "test",
+                    "customer_phone": "0701234567",
+                    "item_id": "014f0157-0af8-4d6e-b874-0428ef76ebf0",
+                    "item_name": "iphone 11 pro",
+                    "category": "Back Cover",
+                    "model_number": "evo clear",
+                    "imei_number": "",
+                    "quantity": 1,
+                    "unit_price": 1000,
+                    "total_price": 1000,
+                    "profit": 600.0,
+                    "date": "2025-07-10 17:10:43",
+                    "type": "regular",
+                    "payment_method": "Partial Payment",
+                    "payment_details": "",
+                    "credit_amount": 700.0,
+                    "cash_amount": 300.0
+                }
+            ],
+            "payment_history": [
+                {
+                    "date": "2025-07-11 00:01:16",
+                    "amount": 200.0,
+                    "method": "Cash",
+                    "details": "",
+                    "notes": ""
+                },
+                {
+                    "date": "2025-07-11 00:01:45",
+                    "amount": 500.0,
+                    "method": "Cash",
+                    "details": "",
+                    "notes": ""
+                }
+            ]
+        },
+        {
+            "id": "c441c62e-fa7c-4b30-aac3-296d3e5d53cc",
+            "date": "2025-07-11 14:52:03",
+            "customer_name": "Shanuka",
+            "customer_phone": "0701272525",
+            "total_amount": 600,
+            "credit_amount": 600,
+            "cash_amount": 0,
+            "due_date": "2025-08-14",
+            "description": "Cheque payment - 942097",
+            "status": "pending",
+            "sale_items": [
+                {
+                    "id": "725a066f-3978-4fce-be59-a0fc509ec3bd",
+                    "customer_name": "Shanuka",
+                    "customer_phone": "0701272525",
+                    "item_id": "e7a176f3-935e-4fca-abc8-dd23f574e80d",
+                    "item_name": "iphone 11 pro max",
+                    "category": "Back Cover",
+                    "model_number": "printed",
+                    "imei_number": "",
+                    "quantity": 1,
+                    "unit_price": 600,
+                    "total_price": 600,
+                    "profit": 200.0,
+                    "date": "2025-07-11 14:52:51",
+                    "type": "regular",
+                    "payment_method": "Cheque",
+                    "payment_details": "942097",
+                    "credit_amount": 600.0,
+                    "cash_amount": 0.0
+                }
+            ],
+            "payment_history": []
+        },
+        {
+            "id": "f02fbc45-5116-4c4b-9a84-38fad932dc4a",
+            "date": "2025-07-11 14:52:51",
+            "customer_name": "Shanuka",
+            "customer_phone": "0701272525",
+            "total_amount": 0.0,
+            "credit_amount": 600,
+            "cash_amount": 0.0,
+            "due_date": "2025-08-14",
+            "description": "Cheque payment - 942097",
+            "status": "paid",
+            "sale_items": [],
+            "payment_history": [
+                {
+                    "date": "2025-07-11 14:53:11",
+                    "amount": 600.0,
+                    "method": "Cash",
+                    "details": "",
+                    "notes": ""
+                }
+            ]
+        }
+    ]
+}

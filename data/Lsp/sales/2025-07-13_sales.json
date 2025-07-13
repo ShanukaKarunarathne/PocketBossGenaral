@@ -1,0 +1,9 @@
+{
+    "sales": [],
+    "daily_summary": {
+        "sales_count": 0,
+        "sales_amount": 0,
+        "profit": 0,
+        "expenses": 0
+    }
+}

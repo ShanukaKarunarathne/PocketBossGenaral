@@ -1,0 +1,12 @@
+{
+    "expenses": [
+        {
+            "id": "a56119e8-720f-4007-a2ee-ac05d0d30085",
+            "category": "Rent",
+            "description": "test01",
+            "amount": 1000.0,
+            "date": "2025-07-08 10:32:29"
+        }
+    ],
+    "daily_summary": {}
+}
