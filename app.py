@@ -2268,9 +2268,7 @@ def sales2():
 # At the end of your app.py file, modify the main block:
 if __name__ == '__main__':
     ensure_base_folders()
-    # Get port from environment variable (Railway provides this)
-    port = int(os.environ.get('PORT', 5001))
-    # Production settings - Railway sets RAILWAY_ENVIRONMENT
-    debug_mode = os.environ.get('RAILWAY_ENVIRONMENT') != 'production'
-    app.run(host='0.0.0.0', port=port, debug=debug_mode)
+    # For PythonAnywhere, we don't need to specify host and port
+    # PythonAnywhere handles this through WSGI
+    app.run(debug=False)  # Set debug=False for production
 
