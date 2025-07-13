@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - LSP Embroidery and Printing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+            padding: 20px;
+        }
+        .receipt {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: white;
+            padding: 20mm;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px solid #dc2626;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        .company-address {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            color: #333;
+            font-size: 12px;
+        }
+        .receipt-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #dc2626;
+            text-align: center;
+            margin: 30px 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .receipt-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 15px 0;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .receipt-details div {
+            flex: 1;
+        }
+        .receipt-details p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .receipt-details strong {
+            color: #1e40af;
+        }
+        .receipt-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .receipt-items th {
+            background: #1e40af;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 12px;
+            border: 1px solid #1e40af;
+        }
+        .receipt-items td {
+            padding: 10px 8px;
+            border: 1px solid #e5e5e5;
+            font-size: 12px;
+            color: #333;
+        }
+        .receipt-items tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .receipt-total {
+            text-align: right;
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 2px solid #dc2626;
+            background: #fff;
+        }
+        .receipt-total p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #dc2626;
+        }
+        .warranty-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #1e40af;
+            background: #f8faff;
+        }
+        .warranty-section h3 {
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .warranty-section p {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+        .signature-box {
+            width: 45%;
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .footer h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .footer p {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .paid-stamp {
+            position: absolute;
+            top: 100px;
+            right: 30px;
+            background: white;
+            color: #dc2626;
+            padding: 10px 20px;
+            border: 3px solid #dc2626;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            transform: rotate(15deg);
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
+        .btn-success {
+            background: #059669;
+            color: white;
+        }
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+                        
+            .receipt {
+                box-shadow: none;
+                margin: 0;
+                padding: 15mm;
+                width: 210mm;
+                min-height: 297mm;
+            }
+                        
+            .actions {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .receipt {
+                width: 100%;
+                min-height: auto;
+                padding: 15px;
+            }
+                        
+            .receipt-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+                        
+            .signature-area {
+                flex-direction: column;
+                gap: 30px;
+            }
+                        
+            .signature-box {
+                width: 100%;
+            }
+                        
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <div class="receipt-header">
+            <img src="../../static/images/Dinantha.jpg" alt="LSP Embroidery and Printing" class="logo">
+            <div class="company-name">LSP Embroidery and Printing</div>
+            <div class="company-address">Badagamuwa, Thorayaya, Kurunegala</div>
+            <div class="contact-info">
+                Phone: +94 (76) 566 8092 / 077 464 3649 | Email: lspembroidery@gmail.com
+            </div>
+        </div>
+        <div class="receipt-title">Sales Receipt</div>
+        <div class="receipt-details">
+            <div>
+                <p><strong>Receipt #:</strong> {{ receipt.receipt_id }}</p>
+                <p><strong>Date & Time:</strong> {{ receipt.date }}</p>
+            </div>
+            <div>
+                <p><strong>Customer:</strong> {{ receipt.customer_name }}</p>
+                <p><strong>Phone:</strong> {{ receipt.customer_phone }}</p>
+            </div>
+        </div>
+        <table class="receipt-items">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Price (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in receipt.sale_items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.model_number }}</td>
+                    <td>{{ item.description if item.description else 'N/A' }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.unit_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="receipt-total">
+            <p>TOTAL: Rs. {{ receipt.total }}</p>
+        </div>
+        <div class="footer">
+            <h4>Thank you for choosing LSP Embroidery and Printing!</h4>
+        </div>
+        <div class="paid-stamp">PAID</div>
+        <div class="actions">
+            <button class="btn btn-primary" onclick="window.print()">Print Receipt</button>
+            <button class="btn btn-success" onclick="downloadReceipt()">Download Receipt</button>
+            <a href="{{ url_for('sales') }}" class="btn btn-secondary">Back to Sales</a>
+        </div>
+    </div>
+    <script>
+        function downloadReceipt() {
+            const receiptContent = document.querySelector('.receipt').cloneNode(true);
+            const actions = receiptContent.querySelector('.actions');
+            if (actions) {
+                actions.remove();
+            }
+            const html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>LSP Embroidery and Printing Receipt</title>
+                    <style>${document.querySelector('style').innerHTML}</style>
+                </head>
+                <body>
+                    ${receiptContent.outerHTML}
+                </body>
+                </html>
+            `;
+            const blob = new Blob([html], { type: 'text/html' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'LSP_Receipt_{{ receipt.receipt_id }}.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
