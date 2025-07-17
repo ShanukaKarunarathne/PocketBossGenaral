@@ -1,0 +1,26 @@
+{
+    "expenses": [
+        {
+            "id": "53f887d9-8b1b-4bb7-bac1-d13fce990f0f",
+            "category": "Inventory Purchase",
+            "description": "Accessories: test8729 (Model: test8729, Qty: 1)",
+            "amount": 100.0,
+            "date": "2025-07-17 14:17:00"
+        },
+        {
+            "id": "8054e695-e08f-457e-981f-ee0fa1bf06a1",
+            "category": "Trade-in Purchase",
+            "description": "Trade-in Phone: testmadeesha (Model: madeesha, IMEI: yoo)",
+            "amount": 1000.0,
+            "date": "2025-07-17 15:00:25"
+        },
+        {
+            "id": "5d670ef3-83f7-4189-850c-8fc3e781e6ca",
+            "category": "Inventory Purchase",
+            "description": "Accessories: testshanuka (Model: shanuka, Qty: 10)",
+            "amount": 10000.0,
+            "date": "2025-07-17 16:11:23"
+        }
+    ],
+    "daily_summary": {}
+}

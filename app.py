@@ -335,6 +335,7 @@ def return_items_to_inventory(sale):
                 'model_number': sale['model_number'],
                 'imei_number': sale.get('imei_number', ''),
                 'purchase_price': (sale['total_price'] - sale['profit']) / sale['quantity'],
+                'selling_price': sale['unit_price'],
                 'quantity': sale['quantity'],
                 'supplier': 'Returned from sale',
                 'date_added': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -665,6 +666,7 @@ def add_multiple_inventory():
         category = form_data[f'items[{item_index}][category]']
         quantity = int(form_data[f'items[{item_index}][quantity]'])
         purchase_price = float(form_data[f'items[{item_index}][purchase_price]'])
+        selling_price = float(form_data[f'items[{item_index}][selling_price]'])
         
         new_item = {
             'id': str(uuid.uuid4()),
@@ -673,6 +675,7 @@ def add_multiple_inventory():
             'model_number': form_data[f'items[{item_index}][model_number]'],
             'imei_number': '',
             'purchase_price': purchase_price,
+            'selling_price': selling_price,
             'quantity': quantity,
             'supplier': form_data.get(f'items[{item_index}][supplier]', ''),
             'date_added': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -710,6 +713,7 @@ def edit_inventory_item(item_id):
         item['model_number'] = request.form['model_number']
         item['imei_number'] = ''
         item['purchase_price'] = float(request.form['purchase_price'])
+        item['selling_price'] = float(request.form['selling_price'])
         item['quantity'] = int(request.form['quantity'])
         item['supplier'] = request.form['supplier']
         
@@ -887,6 +891,7 @@ def add_multiple_sales():
             'model_number': trade_in['model_number'],
             'imei_number': trade_in.get('imei_number', ''),
             'purchase_price': float(trade_in['trade_in_value']),
+            'selling_price': float(trade_in['trade_in_value']) * 1.2,
             'quantity': 1,
             'supplier': 'Trade-in',
             'date_added': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -934,6 +939,7 @@ def add_multiple_sales():
             'model_number': borrowed_item['model_number'],
             'imei_number': borrowed_item.get('imei_number', ''),
             'purchase_price': float(borrowed_item['purchase_price']),
+            'selling_price': float(borrowed_item['selling_price']),
             'quantity': int(borrowed_item['quantity']),
             'supplier': 'Borrowed',
             'date_added': datetime.now().strftime('%Y-%m-%d %H:%M:%S')

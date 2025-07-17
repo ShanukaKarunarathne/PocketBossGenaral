@@ -1,0 +1,70 @@
+{
+    "sales": [
+        {
+            "id": "1412f842-681b-4c8e-a4ae-eb383b8f4057",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "9992892a-9e78-4aa7-8e03-bf4d793d78fb",
+            "item_name": "test8729",
+            "category": "Accessories",
+            "model_number": "test8729",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 150,
+            "total_price": 150,
+            "profit": 50.0,
+            "date": "2025-07-17 14:59:32",
+            "type": "regular",
+            "payment_method": "Cash",
+            "payment_details": "",
+            "credit_amount": 0.0,
+            "cash_amount": 150.0
+        },
+        {
+            "id": "20efa24b-d337-4cdc-98b2-32bdfab2a75a",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "8098e874-829b-4e13-a3f3-3f727b67bdf5",
+            "item_name": "iphone 12pro",
+            "category": "Back Cover",
+            "model_number": "printed online",
+            "imei_number": "",
+            "quantity": 1,
+            "unit_price": 2000,
+            "total_price": 2000,
+            "profit": 1300.0,
+            "date": "2025-07-17 14:59:32",
+            "type": "regular",
+            "payment_method": "Cash",
+            "payment_details": "",
+            "credit_amount": 0.0,
+            "cash_amount": 2000.0
+        },
+        {
+            "id": "7aaa1d05-dacf-4d53-8538-6b5deac50e45",
+            "customer_name": "Shanuka Karunarathne",
+            "customer_phone": "0701272525",
+            "item_id": "e02acb09-2d0a-4ea4-9b8a-db0aa4a4c833",
+            "item_name": "testmadeesha",
+            "category": "Phone",
+            "model_number": "madeesha",
+            "imei_number": "yoo",
+            "quantity": 1,
+            "unit_price": -1000.0,
+            "total_price": -1000.0,
+            "profit": 0,
+            "date": "2025-07-17 15:00:25",
+            "type": "trade_in",
+            "payment_method": "Cash",
+            "payment_details": "",
+            "credit_amount": 0,
+            "cash_amount": -1000.0
+        }
+    ],
+    "daily_summary": {
+        "sales_count": 3,
+        "sales_amount": 1150.0,
+        "profit": 1350.0,
+        "expenses": 0
+    }
+}

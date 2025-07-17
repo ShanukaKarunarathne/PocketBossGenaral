@@ -315,7 +315,7 @@
             "model_number": "printed online",
             "imei_number": "",
             "purchase_price": 700.0,
-            "quantity": 4,
+            "quantity": 3,
             "supplier": "",
             "date_added": "2025-05-21 18:56:12"
         },
@@ -4201,6 +4201,42 @@
             "quantity": 1,
             "supplier": "Trade-in",
             "date_added": "2025-07-11 15:01:38"
+        },
+        {
+            "id": "9992892a-9e78-4aa7-8e03-bf4d793d78fb",
+            "name": "test8729",
+            "category": "Accessories",
+            "model_number": "test8729",
+            "imei_number": "",
+            "purchase_price": 100.0,
+            "selling_price": 150.0,
+            "quantity": 0,
+            "supplier": "",
+            "date_added": "2025-07-17 14:17:00"
+        },
+        {
+            "id": "e02acb09-2d0a-4ea4-9b8a-db0aa4a4c833",
+            "name": "testmadeesha",
+            "category": "Phone",
+            "model_number": "madeesha",
+            "imei_number": "yoo",
+            "purchase_price": 1000.0,
+            "selling_price": 1200.0,
+            "quantity": 1,
+            "supplier": "Trade-in",
+            "date_added": "2025-07-17 15:00:25"
+        },
+        {
+            "id": "be229c10-6bdc-46fa-a158-9f1155a4da57",
+            "name": "testshanuka",
+            "category": "Accessories",
+            "model_number": "shanuka",
+            "imei_number": "",
+            "purchase_price": 1000.0,
+            "selling_price": 1500.0,
+            "quantity": 10,
+            "supplier": "",
+            "date_added": "2025-07-17 16:11:23"
         }
     ]
 }

@@ -1059,7 +1059,18 @@
                         Total: <span id="cart-total">Rs.0.00</span>
                     </div>
                 </div>
-                
+
+                <div class="price-adjustment-tools" id="price-adjustment-tools" style="display: none;">
+                    <h4>Quick Price Adjustments</h4>
+                    <div class="adjustment-buttons">
+                        <button type="button" class="adjustment-btn" onclick="applyDiscountToAll(5)">5% Discount</button>
+                        <button type="button" class="adjustment-btn" onclick="applyDiscountToAll(10)">10% Discount</button>
+                        <button type="button" class="adjustment-btn" onclick="applyMarkupToAll(10)">10% Markup</button>
+                        <button type="button" class="adjustment-btn" onclick="applyMarkupToAll(20)">20% Markup</button>
+                        <button type="button" class="adjustment-btn" onclick="resetToOriginalPrices()">Reset Prices</button>
+                    </div>
+                </div>
+
                 <form action="{{ url_for('add_multiple_sales') }}" method="post" id="sale-form">
                     <div class="customer-info" id="customer-info" style="display: none;">
                         <h3>Customer Information</h3>
@@ -1333,6 +1344,7 @@
         let cart = [];
         let tradeIns = [];
         let borrowedItems = [];
+        let originalPrices = {};
         
         // Event Listeners
         categoryFilter.addEventListener('change', handleSearch);
@@ -1528,6 +1540,7 @@
             // Display results
             if (filteredItems.length > 0) {
                 customSelect.innerHTML = '';
+                // Find this section in your handleSearch() function (around line 200-220)
                 filteredItems.forEach(item => {
                     const option = document.createElement('div');
                     option.className = 'select-option';
@@ -1539,17 +1552,16 @@
                         Model: ${item.model_number}
                         ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
                         <br>Available: ${item.quantity}
+                        <br><strong>Price: Rs.${item.selling_price ? item.selling_price.toFixed(2) : 'N/A'}</strong>
                     `;
                     option.addEventListener('click', () => {
                         addToCart(item);
                         customSelect.style.display = 'none';
                         itemSearch.value = '';
-                        // Reset filters after selection (optional)
-                        // categoryFilter.value = '';
-                        // typeFilter.value = '';
                     });
                     customSelect.appendChild(option);
                 });
+
                 customSelect.style.display = 'block';
             } else {
                 // Show "no results" message
@@ -1595,8 +1607,9 @@
                     imei_number: item.imei_number || '',
                     purchase_price: item.purchase_price,
                     quantity: 1,
-                    sellingPrice: Math.ceil((item.purchase_price * 1.5) / 100) * 100, // Default 20% markup
-                    maxQuantity: item.category === 'Phone' ? 1 : item.quantity, // Phones can only have qty 1
+                    // Use the selling_price from inventory instead of calculating markup
+                    sellingPrice: item.selling_price || Math.ceil((item.purchase_price * 1.5) / 100) * 100,
+                    maxQuantity: item.category === 'Phone' ? 1 : item.quantity,
                     imei_required: item.category === 'Phone'
                 };
                 
@@ -1605,7 +1618,36 @@
             }
         }
 
-        
+        function applyDiscountToAll(percentage) {
+            cart.forEach(item => {
+                const discountAmount = (item.sellingPrice * percentage) / 100;
+                const newPrice = item.sellingPrice - discountAmount;
+                
+                // Don't go below cost price
+                if (newPrice >= item.purchase_price) {
+                    item.sellingPrice = newPrice;
+                }
+            });
+            updateCartDisplay();
+        }
+
+        function applyMarkupToAll(percentage) {
+            cart.forEach(item => {
+                const markupAmount = (item.sellingPrice * percentage) / 100;
+                item.sellingPrice = item.sellingPrice + markupAmount;
+            });
+            updateCartDisplay();
+        }
+
+        function resetToOriginalPrices() {
+            cart.forEach(item => {
+                if (originalPrices[item.id]) {
+                    item.sellingPrice = originalPrices[item.id];
+                }
+            });
+            updateCartDisplay();
+        }
+
         function updateCartDisplay() {
             if (cart.length === 0 && tradeIns.length === 0 && borrowedItems.length === 0) {
                 emptyCartMessage.style.display = 'block';
@@ -1619,10 +1661,14 @@
             cartSummary.style.display = 'block';
             customerInfo.style.display = 'block';
             completeSaleBtn.disabled = false;
+
+            if (cart.length > 0) {
+                    document.getElementById('price-adjustment-tools').style.display = 'block';
+                }
             
             // Clear current cart display
             cartItemsList.innerHTML = '';
-            
+
             // Add regular items
             cart.forEach((item, index) => {
                 const cartItem = document.createElement('div');
@@ -1642,11 +1688,16 @@
                     `;
                 }
                 
+                // Calculate profit margin
+                const profit = item.sellingPrice - item.purchase_price;
+                const profitPercentage = ((profit / item.purchase_price) * 100).toFixed(1);
+                
                 cartItem.innerHTML = `
                     <div class="cart-item-details">
                         <strong>${item.name}</strong> - ${item.category}<br>
                         Model: ${item.model_number}
                         ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
+                        <br><small>Cost: Rs.${item.purchase_price.toFixed(2)} | Profit: Rs.${profit.toFixed(2)} (${profitPercentage}%)</small>
                     </div>
                     <div class="cart-item-actions">
                         <label>Qty: 
@@ -1654,10 +1705,11 @@
                                 onchange="updateCartItemQuantity(${index}, this.value)"
                                 ${item.category === 'Phone' ? 'readonly' : ''}>
                         </label>
-                        <label>Price: Rs.
+                        <label>Selling Price: Rs.
                             <input type="number" class="selling-price-input" min="${item.purchase_price}"
                                 value="${item.sellingPrice}" step="0.01"
-                                onchange="updateCartItemPrice(${index}, this.value)">
+                                onchange="updateCartItemPrice(${index}, this.value)"
+                                title="Minimum price: Rs.${item.purchase_price}">
                         </label>
                         ${imeiField}
                         <span class="remove-item" onclick="removeFromCart(${index})">✕</span>
@@ -1665,6 +1717,7 @@
                 `;
                 cartItemsList.appendChild(cartItem);
             });
+
             
             // Add trade-in items
             tradeIns.forEach((item, index) => {
@@ -1779,10 +1832,21 @@
         }
         
         function updateCartItemPrice(index, price) {
-            cart[index].sellingPrice = parseFloat(price);
+            const newPrice = parseFloat(price);
+            const item = cart[index];
+            
+            // Validate that selling price is not below purchase price
+            if (newPrice < item.purchase_price) {
+                alert(`Selling price cannot be below cost price (Rs.${item.purchase_price.toFixed(2)})`);
+                // Reset to previous value
+                updateCartDisplay();
+                return;
+            }
+            
+            cart[index].sellingPrice = newPrice;
             updateCartDisplay();
         }
-        
+
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartDisplay();
@@ -2254,10 +2318,16 @@
             dueDateInput.value = defaultDate.toISOString().split('T')[0];
         }
 
-        // Update the form validation in the form submission event listener
-
+        function askPassword(event) {
+                event.preventDefault(); // prevent the default link action
+                const password = prompt("Enter admin password:");
+                if (password === "admin123") {
+                    window.location.href = "{{ url_for('index') }}"; // redirect if correct
+                } else if (password !== null) {
+                    alert("Incorrect password.");
+                }
+        }
 
     </script>
 </body>
 </html>
-
