@@ -1068,18 +1068,51 @@
         width: 80px;
     }
 
+    .logout-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .logout-btn:hover {
+        background: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    }
+
+    .logout-btn svg {
+        width: 16px;
+        height: 16px;
+    }
 </style>
 <body>
     <div class="container">
         <header>
             <h1>Pocket Boss</h1>
+            <a href="{{ url_for('logout') }}" class="logout-btn" title="Logout">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H4v16h10v-2h2v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10z"/>
+                </svg>
+                Logout
+            </a>
             <a href="#" class="pro-btn" title="Go to Pro Version" onclick="askPassword(event)">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
             </a>
-        </header>
-           
+        </header>           
         <main>
             <section class="add-sale">
                 <h2>Record New Sale</h2>
@@ -1613,6 +1646,7 @@
                     option.className = 'select-option';
                     option.innerHTML = `
                         <strong>${item.name}</strong>
+                        
                         <br>
                         Model: ${item.model_number}
                         ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
