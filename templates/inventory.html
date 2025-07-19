@@ -1036,7 +1036,7 @@
                 </ul>
             </nav>
         </header>
-        
+                
         <main>
             <!-- Flash Messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -1048,16 +1048,16 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            
+                        
             <section class="add-inventory">
                 <h2>Add Multiple Items to Inventory</h2>
-                
+                                
                 <form action="{{ url_for('add_multiple_inventory') }}" method="post" id="inventory-form">
                     <div id="items-container" class="multi-item-form">
                         <div class="item-entry" id="item-template">
                             <span class="remove-item" onclick="removeItem(this)">✕</span>
-                            <h3></span></h3>
-                            
+                            <h3>Item 1</h3>
+                                                        
                             <div class="form-row">
                                 <div class="form-col">
                                     <div class="form-group">
@@ -1065,22 +1065,16 @@
                                         <input type="text" id="name_0" name="items[0][name]" required>
                                     </div>
                                 </div>
-                                
-                                <div class="form-col">
-                                    <div class="form-group">
-                                        <input type="hidden" name="items[0][category]" value="Accessories">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
+                                                                
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="model_number_0">Model Number</label>
                                         <input type="text" id="model_number_0" name="items[0][model_number]" required>
                                     </div>
                                 </div>
-                                
+                            </div>
+                                                        
+                            <div class="form-row">
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="quantity_0">Quantity</label>
@@ -1088,9 +1082,7 @@
                                         <small>Total quantity to add to inventory</small>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="form-row">
+                                
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="purchase_price_0">Purchase Price (per unit)</label>
@@ -1098,6 +1090,9 @@
                                         <small>This will be automatically added as an expense</small>
                                     </div>
                                 </div>
+                            </div>
+                                                        
+                            <div class="form-row">
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="selling_price_0">Selling Price (per unit)</label>
@@ -1105,7 +1100,7 @@
                                         <small>Price at which you'll sell this item</small>
                                     </div>
                                 </div>
-                                
+                                                                
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="supplier_0">Supplier</label>
@@ -1117,22 +1112,21 @@
                     </div>
                     
                     <div class="form-actions">
+                        <button type="button" onclick="addNewItem()" class="btn btn-secondary">Add Another Item</button>
                         <button type="submit" class="btn btn-primary">Add Items to Inventory</button>
                     </div>
                 </form>
             </section>
-
-            
+                        
             <section class="inventory-list">
                 <h2>Current Inventory</h2>
-                
+                                
                 <div class="filter-controls">
                     <input type="text" id="search-input" placeholder="Search by name or model...">
-                    
                     <button onclick="filterInventory()">Filter</button>
                     <button onclick="resetFilters()">Reset</button>
                 </div>
-                
+                                
                 <table id="inventory-table">
                     <thead>
                         <tr>
@@ -1148,7 +1142,7 @@
                     </thead>
                     <tbody>
                         {% for item in inventory %}
-                        <tr class="{% if item.quantity < 5 %}low-stock{% endif %}" data-category="{{ item.category }}">
+                        <tr class="{% if item.quantity < 5 %}low-stock{% endif %}">
                             <td>{{ item.name }}</td>
                             <td>{{ item.model_number }}</td>
                             <td>Rs.{{ item.purchase_price }}</td>
@@ -1166,15 +1160,15 @@
                 </table>
             </section>
         </main>
-        
+                
         <footer>
             <p>&copy; 2025 - Pocket Boss</p>
         </footer>
     </div>
-
+    
     <!-- Go to Bottom Button -->
     <button class="go-to-bottom-btn" id="goToBottomBtn" onclick="goToBottom()" title="Go to Bottom"></button>
-
+    
     <!-- Edit Item Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
@@ -1191,32 +1185,12 @@
                     
                     <div class="form-col">
                         <div class="form-group">
-                            <label>Category</label>
-                            <div class="category-checkboxes">
-                                <label><input type="radio" name="category" value="Phone" id="edit-category-phone" required> Phone</label>
-                                <label><input type="radio" name="category" value="Accessories" id="edit-category-accessories" required> Accessories</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
                             <label for="edit-model-number">Model Number</label>
                             <input type="text" id="edit-model-number" name="model_number" required>
                         </div>
                     </div>
-                    
-                    <div class="form-col">
-                        <div class="form-group" id="edit-imei-field">
-                            <label for="edit-imei-number">IMEI Number</label>
-                            <input type="text" id="edit-imei-number" name="imei_number" pattern="[0-9]{15}" title="IMEI should be 15 digits">
-                            <small>Only required for phones</small>
-                        </div>
-                    </div>
                 </div>
-                
+                                
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
@@ -1224,18 +1198,10 @@
                             <input type="number" id="edit-purchase-price" name="purchase_price" step="0.01" required>
                         </div>
                     </div>
-
                     <div class="form-col">
                         <div class="form-group">
                             <label for="edit-selling-price">Selling Price</label>
                             <input type="number" id="edit-selling-price" name="selling_price" step="0.01" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="edit-quantity">Quantity</label>
-                            <input type="number" id="edit-quantity" name="quantity" value="1" min="1" required>
                         </div>
                     </div>
                 </div>
@@ -1243,17 +1209,24 @@
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
+                            <label for="edit-quantity">Quantity</label>
+                            <input type="number" id="edit-quantity" name="quantity" value="1" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
                             <label for="edit-supplier">Supplier</label>
                             <input type="text" id="edit-supplier" name="supplier">
                         </div>
                     </div>
                 </div>
-                
+                                
                 <button type="submit" class="btn">Update Item</button>
             </form>
         </div>
     </div>
-
+    
     <!-- Delete Confirmation Modal -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
@@ -1268,208 +1241,141 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         let itemCount = 1;
-        
+                
         function addNewItem() {
             const container = document.getElementById('items-container');
             const template = document.getElementById('item-template');
             const newItem = template.cloneNode(true);
-            
+                        
             // Update ID and name attributes
             newItem.id = `item-${itemCount}`;
-            newItem.querySelectorAll('input, select').forEach(input => {
+            newItem.querySelectorAll('input').forEach(input => {
                 const oldName = input.name;
                 const oldId = input.id;
-                
+                                
                 // Update name attribute with new index
                 input.name = oldName.replace(/items\[\d+\]/, `items[${itemCount}]`);
-                
+                                
                 // Update id attribute with new index
                 input.id = oldId.replace(/_\d+$/, `_${itemCount}`);
                 
+                // Clear value
+                if (input.type !== 'number' || input.name.includes('quantity')) {
+                    if (input.name.includes('quantity')) {
+                        input.value = '1';
+                    } else {
+                        input.value = '';
+                    }
+                }
+                                
                 // Update label's for attribute
                 const label = input.previousElementSibling;
                 if (label && label.tagName === 'LABEL') {
                     label.setAttribute('for', input.id);
                 }
             });
-            
+                        
             // Update item number display
-            newItem.querySelector('.item-number').textContent = itemCount + 1;
-            
-            // Update IMEI field ID
-            const imeiField = newItem.querySelector('.imei-field');
-            imeiField.id = `imei_field_${itemCount}`;
-            
-            // Update quantity field ID
-            const quantityField = newItem.querySelector('.quantity-field');
-            quantityField.id = `quantity_field_${itemCount}`;
-            
+            newItem.querySelector('h3').textContent = `Item ${itemCount + 1}`;
+                        
             // Add the new item to the container
             container.appendChild(newItem);
-            
-            // Initialize IMEI field visibility
-            toggleIMEIField(itemCount);
-            
+                        
             // Increment counter
             itemCount++;
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add event listeners to category radio buttons
-            document.querySelectorAll('input[name^="items"][name$="[category]"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const index = this.name.match(/\[(\d+)\]/)[1];
-                    toggleIMEIField(index);
-                });
-            });
-            
-            // Add event listeners to edit modal radio buttons
-            document.querySelectorAll('input[name="category"]').forEach(radio => {
-                radio.addEventListener('change', toggleEditIMEIField);
-            });
-        });
-
-        
+                
         function removeItem(button) {
             // Don't remove if it's the only item
             const container = document.getElementById('items-container');
             if (container.children.length > 1) {
                 const item = button.closest('.item-entry');
                 item.remove();
-                
+                                
                 // Renumber the items
                 const items = container.querySelectorAll('.item-entry');
                 items.forEach((item, index) => {
-                    item.querySelector('.item-number').textContent = index + 1;
+                    item.querySelector('h3').textContent = `Item ${index + 1}`;
                 });
             } else {
                 alert('You must have at least one item.');
             }
         }
-        
-        function toggleIMEIField(index) {
-            const category = document.getElementById(`category_${index}`).value;
-            const imeiField = document.getElementById(`imei_field_${index}`);
-            const imeiInput = document.getElementById(`imei_number_${index}`);
-            const quantityField = document.getElementById(`quantity_field_${index}`);
-            const phoneQuantityNote = quantityField.querySelector('.phone-quantity-note');
-            
-            if (category === 'Phone') {
-                imeiField.style.display = 'block';
-                imeiInput.setAttribute('required', '');
-                phoneQuantityNote.style.display = 'block';
-            } else {
-                imeiField.style.display = 'none';
-                imeiInput.removeAttribute('required');
-                imeiInput.value = '';
-                phoneQuantityNote.style.display = 'none';
-            }
-        }
-        
-        function toggleEditIMEIField() {
-            const category = document.getElementById('edit-category').value;
-            const imeiField = document.getElementById('edit-imei-field');
-            const imeiInput = document.getElementById('edit-imei-number');
-            
-            if (category === 'Phone') {
-                imeiField.style.display = 'block';
-                imeiInput.setAttribute('required', '');
-            } else {
-                imeiField.style.display = 'none';
-                imeiInput.removeAttribute('required');
-                imeiInput.value = '';
-            }
-        }
-        
+                
         function filterInventory() {
-            const categoryFilter = document.getElementById('category-filter').value;
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const table = document.getElementById('inventory-table');
             const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            
+                        
             for (let i = 0; i < rows.length; i++) {
                 const row = rows[i];
-                const category = row.getAttribute('data-category');
-                const name = row.getElementsByTagName('td')[1].textContent.toLowerCase();
-                const model = row.getElementsByTagName('td')[3].textContent.toLowerCase();
-                
-                const categoryMatch = !categoryFilter || category === categoryFilter;
+                const name = row.getElementsByTagName('td')[0].textContent.toLowerCase();
+                const model = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+                                
                 const searchMatch = !searchTerm ||
                                   name.includes(searchTerm) ||
                                   model.includes(searchTerm);
-                
-                if (categoryMatch && searchMatch) {
+                                
+                if (searchMatch) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
                 }
             }
         }
-        
+                
         function resetFilters() {
-            document.getElementById('category-filter').value = '';
             document.getElementById('search-input').value = '';
-            
+                        
             const table = document.getElementById('inventory-table');
             const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            
+                        
             for (let i = 0; i < rows.length; i++) {
                 rows[i].style.display = '';
             }
         }
-        
+                
         // Edit item functionality
         function openEditModal(itemId) {
             fetch(`/get_inventory_item/${itemId}`)
                 .then(response => response.json())
                 .then(item => {
                     document.getElementById('edit-name').value = item.name;
-                    
-                    // Set radio button
-                    if (item.category === 'Phone') {
-                        document.getElementById('edit-category-phone').checked = true;
-                    } else {
-                        document.getElementById('edit-category-accessories').checked = true;
-                    }
-                    
                     document.getElementById('edit-model-number').value = item.model_number;
-                    document.getElementById('edit-imei-number').value = item.imei_number || '';
                     document.getElementById('edit-purchase-price').value = item.purchase_price;
                     document.getElementById('edit-selling-price').value = item.selling_price;
                     document.getElementById('edit-quantity').value = item.quantity;
                     document.getElementById('edit-supplier').value = item.supplier || '';
-                    
+                                        
                     document.getElementById('edit-form').action = `/edit_inventory_item/${itemId}`;
-                    toggleEditIMEIField();
                     document.getElementById('editModal').style.display = 'block';
                 });
         }
-
-        
+                
         function closeEditModal() {
             document.getElementById('editModal').style.display = 'none';
         }
-        
+                
         // Delete item functionality
         function confirmDelete(itemId, itemName) {
             // Set confirmation message
-            document.getElementById('delete-confirmation-message').textContent = 
-                `Are you sure you want to delete "${itemName}" from inventory? This action cannot be undone.`;
-            
+            document.getElementById('delete-confirmation-message').textContent =
+                 `Are you sure you want to delete "${itemName}" from inventory? This action cannot be undone.`;
+                        
             // Set form action
             document.getElementById('delete-form').action = `/delete_inventory_item/${itemId}`;
-            
+                        
             // Show modal
             document.getElementById('deleteModal').style.display = 'block';
         }
-        
+                
         function closeDeleteModal() {
             document.getElementById('deleteModal').style.display = 'none';
         }
-        
+                
         // Go to Bottom functionality
         function goToBottom() {
             window.scrollTo({
@@ -1477,14 +1383,13 @@
                 behavior: 'smooth'
             });
         }
-        
-        // Show/hide go to bottom button based on scroll position
+                
         function toggleGoToBottomButton() {
             const button = document.getElementById('goToBottomBtn');
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
-            
+                        
             // Hide button when near bottom (within 200px of bottom)
             if (scrollTop + windowHeight >= documentHeight - 200) {
                 button.classList.add('hidden');
@@ -1492,49 +1397,39 @@
                 button.classList.remove('hidden');
             }
         }
-        
+                
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            toggleIMEIField(0);
-            
-            // Add event listeners to category selects
-            document.querySelectorAll('[id^="category_"]').forEach(select => {
-                select.addEventListener('change', function() {
-                    const index = this.id.split('_')[1];
-                    toggleIMEIField(index);
-                });
-            });
-            
             // Highlight low stock items
             const lowStockRows = document.querySelectorAll('.low-stock');
             lowStockRows.forEach(row => {
-                const quantityCell = row.querySelector('td:nth-child(7)');
+                const quantityCell = row.querySelector('td:nth-child(5)');
                 if (parseInt(quantityCell.textContent) < 5) {
                     quantityCell.style.color = '#e74c3c';
                     quantityCell.style.fontWeight = 'bold';
                 }
             });
-            
+                        
             // Add scroll event listener for go to bottom button
             window.addEventListener('scroll', toggleGoToBottomButton);
-            
+                        
             // Initial check for button visibility
             toggleGoToBottomButton();
-            
+                        
             // Close modals when clicking outside
             window.onclick = function(event) {
                 const editModal = document.getElementById('editModal');
                 const deleteModal = document.getElementById('deleteModal');
-                
+                                
                 if (event.target === editModal) {
                     closeEditModal();
                 }
-                
+                                
                 if (event.target === deleteModal) {
                     closeDeleteModal();
                 }
             };
-            
+                        
             // Auto-hide flash messages after 5 seconds
             setTimeout(function() {
                 const flashMessages = document.querySelectorAll('.flash-message');
@@ -1543,52 +1438,6 @@
                 });
             }, 5000);
         });
-        
-        // Form validation before submit
-        document.getElementById('inventory-form').addEventListener('submit', function(event) {
-            const items = document.querySelectorAll('.item-entry');
-            let valid = true;
-            
-            items.forEach((item, index) => {
-                const category = document.getElementById(`category_${index}`).value;
-                const imeiInput = document.getElementById(`imei_number_${index}`);
-                
-                if (category === 'Phone' && (!imeiInput.value || !imeiInput.checkValidity())) {
-                    valid = false;
-                    imeiInput.classList.add('invalid');
-                    
-                    // Show error message
-                    let errorMsg = imeiInput.nextElementSibling;
-                    if (!errorMsg || !errorMsg.classList.contains('error-message')) {
-                        errorMsg = document.createElement('small');
-                        errorMsg.classList.add('error-message');
-                        errorMsg.style.color = '#e74c3c';
-                        imeiInput.parentNode.appendChild(errorMsg);
-                    }
-                    errorMsg.textContent = 'IMEI number is required for phones and must be 15 digits.';
-                } else if (imeiInput) {
-                    imeiInput.classList.remove('invalid');
-                    const errorMsg = imeiInput.nextElementSibling.nextElementSibling;
-                    if (errorMsg && errorMsg.classList.contains('error-message')) {
-                        errorMsg.remove();
-                    }
-                }
-            });
-            
-            if (!valid) {
-                event.preventDefault();
-                alert('Please fix the errors in the form before submitting.');
-            }
-        });
-        
-        // Helper function to generate unique IMEI for demo purposes
-        function generateIMEI() {
-            let imei = '';
-            for (let i = 0; i < 15; i++) {
-                imei += Math.floor(Math.random() * 10);
-            }
-            return imei;
-        }
     </script>
 </body>
 </html>

@@ -1,149 +1,6 @@
 {
     "inventory": [
         {
-            "id": "7b573ee6-4bad-4b1e-a12a-35c99c622e47",
-            "name": "iphone 7 & 8 backcover",
-            "category": "Back Cover",
-            "model_number": "JELLY silicon",
-            "imei_number": "",
-            "purchase_price": 600.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:11:34"
-        },
-        {
-            "id": "27d77211-33b9-4345-aa07-5b24b33d0869",
-            "name": "iphone 7 & 8 backcover",
-            "category": "Back Cover",
-            "model_number": "printed",
-            "imei_number": "",
-            "purchase_price": 400.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:13:03"
-        },
-        {
-            "id": "a7cf27b2-b4ac-4825-a555-97a78e9dce76",
-            "name": "iphone 7 & 8 backcover",
-            "category": "Back Cover",
-            "model_number": "carbon",
-            "imei_number": "",
-            "purchase_price": 690.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:14:18"
-        },
-        {
-            "id": "e2b1b3ea-1898-4a1e-8df6-9a3f633cef70",
-            "name": "iphone 6 plus & 6s plus",
-            "category": "Back Cover",
-            "model_number": "carbon fiber",
-            "imei_number": "",
-            "purchase_price": 690.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:14:55"
-        },
-        {
-            "id": "a060f30f-c152-406b-9eaa-90810540173c",
-            "name": "iphone 6 & 6s",
-            "category": "Back Cover",
-            "model_number": "6G carbon fiber",
-            "imei_number": "",
-            "purchase_price": 690.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:15:41"
-        },
-        {
-            "id": "fde7e6d6-52e8-42d6-a6f7-738117a024f8",
-            "name": "iphone 6 & 6s",
-            "category": "Back Cover",
-            "model_number": "6G leather case",
-            "imei_number": "",
-            "purchase_price": 380.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:16:05"
-        },
-        {
-            "id": "ab67233c-2c5e-4005-a365-acddcc4fc3b8",
-            "name": "iphone 7 plus & 8 plus",
-            "category": "Back Cover",
-            "model_number": "normal silicon",
-            "imei_number": "",
-            "purchase_price": 390.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:17:04"
-        },
-        {
-            "id": "014f0157-0af8-4d6e-b874-0428ef76ebf0",
-            "name": "iphone 11 pro",
-            "category": "Back Cover",
-            "model_number": "evo clear",
-            "imei_number": "",
-            "purchase_price": 400.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:17:41"
-        },
-        {
-            "id": "90c8b758-9cb1-42be-959a-6dc0eac3126a",
-            "name": "iphone 11 pro",
-            "category": "Back Cover",
-            "model_number": "colour -magsafe",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:19:39"
-        },
-        {
-            "id": "800bfa5b-80f7-467e-b592-26c9602e3786",
-            "name": "iphone 11 pro",
-            "category": "Back Cover",
-            "model_number": "coblue tpu",
-            "imei_number": "",
-            "purchase_price": 750.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:20:40"
-        },
-        {
-            "id": "b876af33-a92b-44b4-aaf3-560a7abaea71",
-            "name": "iphone 11 pro",
-            "category": "Back Cover",
-            "model_number": "JELLY silicon",
-            "imei_number": "",
-            "purchase_price": 600.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:21:01"
-        },
-        {
-            "id": "f7b274cf-d3aa-4586-9a0f-8f05d8b11147",
-            "name": "iphone 11 pro",
-            "category": "Back Cover",
-            "model_number": "printed",
-            "imei_number": "",
-            "purchase_price": 400.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:21:18"
-        },
-        {
-            "id": "e7a176f3-935e-4fca-abc8-dd23f574e80d",
-            "name": "iphone 11 pro max",
-            "category": "Back Cover",
-            "model_number": "printed",
-            "imei_number": "",
-            "purchase_price": 400.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:22:41"
-        },
-        {
             "id": "0b45bbec-0864-45f1-9215-1dd674c769b0",
             "name": "evo clear",
             "category": "Back Cover",
@@ -164,17 +21,6 @@
             "quantity": 1,
             "supplier": "",
             "date_added": "2025-05-21 18:27:16"
-        },
-        {
-            "id": "5ea3efcc-5dc1-4d84-93bf-7180d46a5ad5",
-            "name": "iphone 11 pro max",
-            "category": "Back Cover",
-            "model_number": "magsafe ",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 18:29:09"
         },
         {
             "id": "39c8f9c0-c4d1-4c4c-b0b5-d8dcf9bd27d0",
@@ -1332,17 +1178,6 @@
             "date_added": "2025-05-21 20:08:26"
         },
         {
-            "id": "32737539-cdea-4286-9113-53c2cab0a189",
-            "name": "samsung A06",
-            "category": "Back Cover",
-            "model_number": "silicon",
-            "imei_number": "",
-            "purchase_price": 300.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 20:12:37"
-        },
-        {
             "id": "852ec599-1ced-4bd7-a8b2-c08ee3601f06",
             "name": "SAMSUNG A06",
             "category": "Back Cover",
@@ -1882,17 +1717,6 @@
             "date_added": "2025-05-21 20:54:04"
         },
         {
-            "id": "c94119cf-136f-4657-9afb-758ba943efed",
-            "name": "AIR POD ",
-            "category": "Other",
-            "model_number": "PRO",
-            "imei_number": "",
-            "purchase_price": 2350.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-21 20:54:51"
-        },
-        {
             "id": "e3022961-f1d7-4982-8bae-330d1150795c",
             "name": "AIR POD ",
             "category": "Other",
@@ -1957,39 +1781,6 @@
             "quantity": 1,
             "supplier": "",
             "date_added": "2025-05-21 21:08:42"
-        },
-        {
-            "id": "56c559a2-927f-47a1-b299-8d28226f0825",
-            "name": "Redmi A5",
-            "category": "Accessory",
-            "model_number": "862784076882246",
-            "imei_number": "",
-            "purchase_price": 26500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 12:21:49"
-        },
-        {
-            "id": "f52612e6-a425-49eb-8529-4e10cc2af625",
-            "name": "Redmi A5",
-            "category": "Screen Guard",
-            "model_number": "Tempered",
-            "imei_number": "",
-            "purchase_price": 150.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 12:21:49"
-        },
-        {
-            "id": "6b47db3f-1ebf-4d3e-956e-2c7015dfce5b",
-            "name": "M01 core",
-            "category": "Other",
-            "model_number": "Battery",
-            "imei_number": "",
-            "purchase_price": 1850.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 12:24:44"
         },
         {
             "id": "9e7fc08f-7225-4b0a-9586-4dc11bad4ae8",
@@ -2146,17 +1937,6 @@
             "date_added": "2025-05-22 13:37:21"
         },
         {
-            "id": "bdb5549b-9e9e-4339-84a2-6010a18b36ad",
-            "name": "IPHONE ADAPTER 20W",
-            "category": "Charger",
-            "model_number": "ORIGINAL 100%",
-            "imei_number": "",
-            "purchase_price": 5000.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-22 13:38:47"
-        },
-        {
             "id": "2adf00ac-6519-431e-bba7-896056cd350f",
             "name": "SAMSUNG 25W",
             "category": "Charger",
@@ -2177,28 +1957,6 @@
             "quantity": 1,
             "supplier": "",
             "date_added": "2025-05-22 13:43:28"
-        },
-        {
-            "id": "dfaa9570-3616-446f-ab30-af91e91ffa8c",
-            "name": "iphone 7 & 8 & SE",
-            "category": "Screen Protector",
-            "model_number": "Super D Black",
-            "imei_number": "",
-            "purchase_price": 120.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-22 14:01:41"
-        },
-        {
-            "id": "2c4027f9-3d15-4eb7-935a-a1315f58ce8e",
-            "name": "Iphone SE",
-            "category": "Back Cover",
-            "model_number": "magsafe tpu",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 14:03:35"
         },
         {
             "id": "00aaf8a2-a3cc-4b72-8bf9-a14165435c17",
@@ -2476,28 +2234,6 @@
             "date_added": "2025-05-22 15:38:22"
         },
         {
-            "id": "ab48b897-ae7f-4267-9ffd-7b5e34d0846d",
-            "name": "huawei y7A",
-            "category": "Other",
-            "model_number": "LCD repair",
-            "imei_number": "",
-            "purchase_price": 3750.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 15:44:19"
-        },
-        {
-            "id": "c100dd0f-cd21-48fb-aedb-b73ac1ef86a5",
-            "name": "Huawei Y7A",
-            "category": "Back Cover",
-            "model_number": "Silicon",
-            "imei_number": "",
-            "purchase_price": 300.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 15:44:19"
-        },
-        {
             "id": "891edd78-96f5-4785-98f4-44284b6bba1f",
             "name": "iphone 15 pro & 16 pro",
             "category": "Screen Protector",
@@ -2729,17 +2465,6 @@
             "date_added": "2025-05-22 16:05:23"
         },
         {
-            "id": "04f55b61-9587-4636-92b3-706b59225944",
-            "name": "JBL",
-            "category": "Other",
-            "model_number": "speaker",
-            "imei_number": "",
-            "purchase_price": 3750.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 16:12:56"
-        },
-        {
             "id": "be52510f-723d-4da7-8b3d-22d5e88bdcbe",
             "name": "celebrat",
             "category": "Handfree",
@@ -2960,105 +2685,6 @@
             "date_added": "2025-05-22 16:41:55"
         },
         {
-            "id": "b1aa7fde-7872-46c0-953d-4dd33e4a1452",
-            "name": "pixel 7 ",
-            "category": "Back Cover",
-            "model_number": "TPU",
-            "imei_number": "",
-            "purchase_price": 250.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-22 18:00:17"
-        },
-        {
-            "id": "be81a2dc-4bf3-4311-bc73-12615501856c",
-            "name": "samsung",
-            "category": "Screen Guard",
-            "model_number": "a06",
-            "imei_number": "",
-            "purchase_price": 100.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-23 11:01:19"
-        },
-        {
-            "id": "ebfc3aa8-a6fa-474c-9640-faf456b8d2b7",
-            "name": "Samsung",
-            "category": "Back Cover",
-            "model_number": "A55",
-            "imei_number": "",
-            "purchase_price": 800.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-23 11:32:36"
-        },
-        {
-            "id": "11e9ece5-57ba-4f2a-b22c-ad051d75be8b",
-            "name": "Iphone 11pro",
-            "category": "Phone",
-            "model_number": "11pro",
-            "imei_number": "353250107108080",
-            "purchase_price": 73000.0,
-            "quantity": 0,
-            "supplier": "Custom ",
-            "date_added": "2025-05-23 11:51:35"
-        },
-        {
-            "id": "48cb0baf-ba2d-48c2-a2cd-e9ee1ded4833",
-            "name": "iPhone ",
-            "category": "Phone",
-            "model_number": "12pro 256",
-            "imei_number": "356682110238867",
-            "purchase_price": 106000.0,
-            "quantity": 0,
-            "supplier": "Kicha",
-            "date_added": "2025-05-23 13:55:32"
-        },
-        {
-            "id": "8b22c3c0-6f11-45bf-9c3a-0439d7a03ebe",
-            "name": "Camera ring",
-            "category": "Accessory",
-            "model_number": "12pro ",
-            "imei_number": "",
-            "purchase_price": 450.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-23 14:01:19"
-        },
-        {
-            "id": "435e3f2f-75cc-4bff-8f8b-7782220fb143",
-            "name": "iphone 7 plus",
-            "category": "Back Cover",
-            "model_number": "green",
-            "imei_number": "",
-            "purchase_price": 700.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 14:34:35"
-        },
-        {
-            "id": "e6c7c56e-b31f-4b4d-b15f-70f4b7981c12",
-            "name": "iphone 8",
-            "category": "Back Cover",
-            "model_number": "magsafe tpu",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 14:34:35"
-        },
-        {
-            "id": "0e7c7794-6ad6-4df0-b949-3d10ffed53ef",
-            "name": "Iphone 8 64GB",
-            "category": "Accessory",
-            "model_number": "356761082007292",
-            "imei_number": "",
-            "purchase_price": 29000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 14:34:35"
-        },
-        {
             "id": "305cd8ca-f2c4-4eb0-9ea5-3d7aa9e827b3",
             "name": "Switch",
             "category": "Phone",
@@ -3081,17 +2707,6 @@
             "date_added": "2025-05-24 16:25:46"
         },
         {
-            "id": "81b6608c-a03e-473c-8ac4-e6d75272d3f4",
-            "name": "Switch",
-            "category": "Phone",
-            "model_number": "xoda",
-            "imei_number": "111111111111111",
-            "purchase_price": 2600.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-24 16:26:47"
-        },
-        {
             "id": "756c2022-c5ab-4bb7-aa71-711f6749e1d1",
             "name": "cable",
             "category": "Other",
@@ -3112,61 +2727,6 @@
             "quantity": 1,
             "supplier": "Trade-in",
             "date_added": "2025-05-24 16:36:42"
-        },
-        {
-            "id": "20f86ea4-37fd-4f36-bb86-1a9bd05b407f",
-            "name": "iphone 12 pro 256GB",
-            "category": "Back Cover",
-            "model_number": "356462523898684",
-            "imei_number": "",
-            "purchase_price": 106000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 16:36:42"
-        },
-        {
-            "id": "efdba0ea-dc64-408c-90de-abb7646c5137",
-            "name": "iphone 12 pro",
-            "category": "Back Cover",
-            "model_number": "magsafe tpu",
-            "imei_number": "",
-            "purchase_price": 280.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 16:36:42"
-        },
-        {
-            "id": "bacb0e69-6861-404d-bb44-db54db940214",
-            "name": "iphone7g",
-            "category": "Back Cover",
-            "model_number": "tpu",
-            "imei_number": "",
-            "purchase_price": 300.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 16:44:35"
-        },
-        {
-            "id": "3b6775c6-2e15-4b5c-8410-1fd57b2f4575",
-            "name": "sumsung ",
-            "category": "Back Cover",
-            "model_number": "M21",
-            "imei_number": "",
-            "purchase_price": 300.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 17:12:42"
-        },
-        {
-            "id": "6aee5841-b781-4d31-b659-4d8aa24755b5",
-            "name": "samsung",
-            "category": "Screen Guard",
-            "model_number": "M21",
-            "imei_number": "",
-            "purchase_price": 120.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-24 17:12:42"
         },
         {
             "id": "bc001-iphone7",
@@ -3477,138 +3037,6 @@
             "date_added": "2025-01-27 00:00:00"
         },
         {
-            "id": "305a0d48-53f5-4054-a54c-68dd6a1510a3",
-            "name": "b/c pouch",
-            "category": "Back Cover",
-            "model_number": "a22 5g",
-            "imei_number": "",
-            "purchase_price": 1100.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 16:58:19"
-        },
-        {
-            "id": "78506fcc-3723-4060-b030-fafe81175178",
-            "name": "cam ring",
-            "category": "Other",
-            "model_number": "11 pro",
-            "imei_number": "",
-            "purchase_price": 280.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:00:13"
-        },
-        {
-            "id": "45f30fe6-38e8-4cef-afa2-1c8a7a9f7e7b",
-            "name": "5c battery",
-            "category": "Other",
-            "model_number": "nokia",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:04:47"
-        },
-        {
-            "id": "53bbd67c-c60b-403a-bf7a-5e1dd31abbec",
-            "name": "display",
-            "category": "Other",
-            "model_number": "dogeee",
-            "imei_number": "",
-            "purchase_price": 5000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:15:54"
-        },
-        {
-            "id": "57f8db3d-4a73-4873-95f3-cabe36e6d595",
-            "name": "super d",
-            "category": "Screen Guard",
-            "model_number": "iphone 13",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:21:45"
-        },
-        {
-            "id": "99674b6e-ce40-44a2-9ba9-a99df0dbd4fe",
-            "name": "iphone x",
-            "category": "Phone",
-            "model_number": "256GB",
-            "imei_number": "356720081839006",
-            "purchase_price": 38000.0,
-            "quantity": 0,
-            "supplier": "Trade-in",
-            "date_added": "2025-05-25 17:39:09"
-        },
-        {
-            "id": "f826663a-10c7-4be7-84e0-517db56e3ddb",
-            "name": "iphone 13 256GB",
-            "category": "Back Cover",
-            "model_number": "351123620820360",
-            "imei_number": "",
-            "purchase_price": 110000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:39:09"
-        },
-        {
-            "id": "90fa74c0-d079-4669-93c0-1df3704588ea",
-            "name": "Iphone 13",
-            "category": "Back Cover",
-            "model_number": "super D",
-            "imei_number": "",
-            "purchase_price": 120.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:39:09"
-        },
-        {
-            "id": "2742bc33-f670-4dab-8f89-bfb8b7df7ef3",
-            "name": "iphone",
-            "category": "Back Cover",
-            "model_number": "cable",
-            "imei_number": "",
-            "purchase_price": 600.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:39:09"
-        },
-        {
-            "id": "2c97e8fe-aed9-4b45-b1ef-6f63e3faa002",
-            "name": "iphone Se2",
-            "category": "Other",
-            "model_number": "battery repair ",
-            "imei_number": "",
-            "purchase_price": 2900.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 17:43:40"
-        },
-        {
-            "id": "27c60608-e8d6-4464-b3a7-68be4e6d144c",
-            "name": "ihpone",
-            "category": "Back Cover",
-            "model_number": "iphone14",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-25 20:01:18"
-        },
-        {
-            "id": "955b5185-cd86-43ae-8287-8559cfe5b01a",
-            "name": "iphone 11",
-            "category": "Phone",
-            "model_number": "11 46gb",
-            "imei_number": "357458401896872",
-            "purchase_price": 45000.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-25 20:02:54"
-        },
-        {
             "id": "392a2024-d244-47ab-9970-d3b4a5f90cbb",
             "name": "iphone ",
             "category": "Phone",
@@ -3618,226 +3046,6 @@
             "quantity": 1,
             "supplier": "cousterm",
             "date_added": "2025-05-25 20:07:38"
-        },
-        {
-            "id": "a63f0942-a749-407c-99cf-11c1e1d2b1aa",
-            "name": "iphone",
-            "category": "Phone",
-            "model_number": "iphone 13pro",
-            "imei_number": "352203777843024",
-            "purchase_price": 128000.0,
-            "quantity": 0,
-            "supplier": "kicha",
-            "date_added": "2025-05-25 20:08:56"
-        },
-        {
-            "id": "d7fbc08d-011a-43ff-88c2-d6f754e68bb0",
-            "name": "iphone",
-            "category": "Phone",
-            "model_number": "xs gold",
-            "imei_number": "357229093242745",
-            "purchase_price": 40000.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-25 20:10:26"
-        },
-        {
-            "id": "634979a9-f3bd-4bc0-8831-a1431d269c08",
-            "name": "iphone 13",
-            "category": "Phone",
-            "model_number": "ihone 128",
-            "imei_number": "357329381693235",
-            "purchase_price": 100000.0,
-            "quantity": 0,
-            "supplier": "kicha",
-            "date_added": "2025-05-25 20:41:39"
-        },
-        {
-            "id": "8069902c-44af-4516-bf56-2622616e4328",
-            "name": "iphone 13",
-            "category": "Phone",
-            "model_number": "iphone 13-128",
-            "imei_number": "357479180514569",
-            "purchase_price": 100000.0,
-            "quantity": 0,
-            "supplier": "kicha",
-            "date_added": "2025-05-25 20:42:44"
-        },
-        {
-            "id": "56eccca2-1104-499c-9b28-0e7245e6e82a",
-            "name": "SAMSUNG",
-            "category": "Phone",
-            "model_number": "A16 5G",
-            "imei_number": "354097150855961",
-            "purchase_price": 79500.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-05-26 13:29:53"
-        },
-        {
-            "id": "27974703-d37c-4808-8a3f-fc5077c59531",
-            "name": "CHAGER SAMSUNG O\\G",
-            "category": "Charger",
-            "model_number": "O\\G",
-            "imei_number": "",
-            "purchase_price": 2900.0,
-            "quantity": 0,
-            "supplier": "SMART MOBILE",
-            "date_added": "2025-05-26 13:31:28"
-        },
-        {
-            "id": "411c54f0-3fa9-4cf7-b112-8a41e659a155",
-            "name": "SAMUNG A16 ",
-            "category": "Screen Protector",
-            "model_number": "A16",
-            "imei_number": "",
-            "purchase_price": 120.0,
-            "quantity": 0,
-            "supplier": "REGAL",
-            "date_added": "2025-05-26 13:33:54"
-        },
-        {
-            "id": "716da756-78df-4290-941b-0ccf07b082a4",
-            "name": "iphone12pro",
-            "category": "Accessory",
-            "model_number": "12pro",
-            "imei_number": "",
-            "purchase_price": 99000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 12:27:39"
-        },
-        {
-            "id": "99617ffc-6422-41c4-86d4-15b21225a304",
-            "name": "samsung",
-            "category": "Accessory",
-            "model_number": "a10s",
-            "imei_number": "",
-            "purchase_price": 11000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 13:47:35"
-        },
-        {
-            "id": "990ac810-5eaf-4a60-a7c1-bb19704aacc0",
-            "name": "samsung",
-            "category": "Back Cover",
-            "model_number": "a10s",
-            "imei_number": "",
-            "purchase_price": 250.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 13:50:31"
-        },
-        {
-            "id": "518d8965-fb1b-4e57-9def-83909b1176ae",
-            "name": "iphone",
-            "category": "Accessory",
-            "model_number": "12",
-            "imei_number": "",
-            "purchase_price": 75500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 15:16:32"
-        },
-        {
-            "id": "4cb4f5e8-5a41-493b-8ddf-a62f64bd334d",
-            "name": "iphone",
-            "category": "Screen Guard",
-            "model_number": "12",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 15:16:32"
-        },
-        {
-            "id": "ebebbd01-8381-4abc-9c99-9e43604f7ba3",
-            "name": "samsung",
-            "category": "Accessory",
-            "model_number": "a165g",
-            "imei_number": "",
-            "purchase_price": 48000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 17:32:19"
-        },
-        {
-            "id": "1a5c0bed-4770-4ae6-ad83-32a41052f805",
-            "name": "samsung",
-            "category": "Back Cover",
-            "model_number": "a165g",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 17:32:19"
-        },
-        {
-            "id": "ca93403d-79a8-4aa3-9d95-0aae17933868",
-            "name": "samsung",
-            "category": "Screen Guard",
-            "model_number": "a165g",
-            "imei_number": "",
-            "purchase_price": 100.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 17:32:19"
-        },
-        {
-            "id": "a43f247d-5af2-4147-bbe5-6f0bee889708",
-            "name": "cable",
-            "category": "Other",
-            "model_number": "iphon e",
-            "imei_number": "",
-            "purchase_price": 550.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 22:02:23"
-        },
-        {
-            "id": "636f0cdb-1277-42f9-8a9b-ce6965abc08b",
-            "name": "12pro",
-            "category": "Accessory",
-            "model_number": "iphone",
-            "imei_number": "",
-            "purchase_price": 106000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 22:02:23"
-        },
-        {
-            "id": "8c712846-708c-4702-8995-61afa4106a45",
-            "name": "12promax",
-            "category": "Accessory",
-            "model_number": "iphone",
-            "imei_number": "",
-            "purchase_price": 137000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-27 22:07:37"
-        },
-        {
-            "id": "66e88af1-85f8-4de7-8caf-4ca77cf17896",
-            "name": "Iphone",
-            "category": "Accessory",
-            "model_number": "13",
-            "imei_number": "",
-            "purchase_price": 101000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 12:59:01"
-        },
-        {
-            "id": "812105b5-30dc-4fea-85fa-6e460e04e8ed",
-            "name": "Iphone",
-            "category": "Other",
-            "model_number": "13",
-            "imei_number": "",
-            "purchase_price": 5000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 12:59:01"
         },
         {
             "id": "b37f8e99-82b3-470b-bb2b-902d5cbec3f5",
@@ -3851,138 +3059,6 @@
             "date_added": "2025-05-28 19:21:50"
         },
         {
-            "id": "b60f0bae-0813-422a-a8bb-900e5a45e661",
-            "name": "Iphone",
-            "category": "Accessory",
-            "model_number": "13 pro max",
-            "imei_number": "",
-            "purchase_price": 165000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 19:21:50"
-        },
-        {
-            "id": "e8e1cf53-3182-49fa-b6a4-2c0809249b0b",
-            "name": "jelly silicon",
-            "category": "Back Cover",
-            "model_number": "13 pro max",
-            "imei_number": "",
-            "purchase_price": 690.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 19:21:50"
-        },
-        {
-            "id": "133a167e-bec3-461f-ad79-76017c8ad690",
-            "name": "iphone",
-            "category": "Accessory",
-            "model_number": "xs",
-            "imei_number": "",
-            "purchase_price": 30000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 19:25:05"
-        },
-        {
-            "id": "c1e8aa75-d7d8-45dc-8362-4067b3ff5681",
-            "name": "doc",
-            "category": "Charger",
-            "model_number": "20w",
-            "imei_number": "",
-            "purchase_price": 3450.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 19:57:02"
-        },
-        {
-            "id": "044b345a-d33b-45d2-a2ef-8bc5f6651e7c",
-            "name": "b sticker",
-            "category": "Other",
-            "model_number": "iphone",
-            "imei_number": "",
-            "purchase_price": 250.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 19:57:02"
-        },
-        {
-            "id": "27dbb09c-2eaf-47a1-b3b1-999bedaf7b32",
-            "name": "iphone",
-            "category": "Accessory",
-            "model_number": "12",
-            "imei_number": "",
-            "purchase_price": 10000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:01:42"
-        },
-        {
-            "id": "a0b59285-1c18-48b0-8349-c808797de0bc",
-            "name": "redmi",
-            "category": "Back Cover",
-            "model_number": "note 12",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:07:45"
-        },
-        {
-            "id": "a4c0331f-03fe-4a22-88ed-9e45256693fe",
-            "name": "iphone",
-            "category": "Screen Guard",
-            "model_number": "16 pro max ",
-            "imei_number": "",
-            "purchase_price": 400.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:09:37"
-        },
-        {
-            "id": "1fc6035d-7a0b-4fe6-b14a-cbd5d2290813",
-            "name": "doc",
-            "category": "Charger",
-            "model_number": "20w",
-            "imei_number": "",
-            "purchase_price": 1800.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:10:55"
-        },
-        {
-            "id": "5376f177-d25f-4fb2-83cf-ec9d82b42aaf",
-            "name": "iphone",
-            "category": "Accessory",
-            "model_number": "12 pro",
-            "imei_number": "",
-            "purchase_price": 55000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:14:05"
-        },
-        {
-            "id": "921ede05-ce41-4cc3-a54f-3a0e8988262b",
-            "name": "tripod",
-            "category": "Other",
-            "model_number": "tripod",
-            "imei_number": "",
-            "purchase_price": 2500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 20:57:45"
-        },
-        {
-            "id": "0978d884-d690-45f8-8233-1eb0ce43af54",
-            "name": "rich brand",
-            "category": "Other",
-            "model_number": "card",
-            "imei_number": "",
-            "purchase_price": 9100.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-28 21:11:07"
-        },
-        {
             "id": "23671c2a-f88d-47c9-a686-9af3fd732028",
             "name": "test02",
             "category": "Phone",
@@ -3991,17 +3067,6 @@
             "purchase_price": 0.0,
             "quantity": 1,
             "supplier": "Trade-in",
-            "date_added": "2025-05-29 19:35:04"
-        },
-        {
-            "id": "0fe400d9-efb4-4c31-91ad-44006b245360",
-            "name": "test",
-            "category": "Accessory",
-            "model_number": "111111111111",
-            "imei_number": "",
-            "purchase_price": 0.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
             "date_added": "2025-05-29 19:35:04"
         },
         {
@@ -4016,17 +3081,6 @@
             "date_added": "2025-05-29 20:39:33"
         },
         {
-            "id": "8d6e54e9-421e-4e6d-84ac-3e5b45ec0769",
-            "name": "Test",
-            "category": "Back Cover",
-            "model_number": "1111111111111",
-            "imei_number": "",
-            "purchase_price": 0.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 00:37:21"
-        },
-        {
             "id": "acb6b532-bfe6-4037-803b-56398ebf3663",
             "name": "IPHONE ",
             "category": "Phone",
@@ -4036,28 +3090,6 @@
             "quantity": 1,
             "supplier": "Trade-in",
             "date_added": "2025-05-30 19:49:02"
-        },
-        {
-            "id": "c8a48a56-6b4f-4e93-aca5-95c50ec936a5",
-            "name": "IPHONE ",
-            "category": "Accessory",
-            "model_number": "11PRO",
-            "imei_number": "",
-            "purchase_price": 80000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 19:49:02"
-        },
-        {
-            "id": "7347be09-c4b0-47bd-ba4f-9b0f421ab1ca",
-            "name": "Iphone cable",
-            "category": "Charger",
-            "model_number": "cable c2lighting",
-            "imei_number": "",
-            "purchase_price": 550.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 20:14:38"
         },
         {
             "id": "6017ce5a-54e2-4c86-921a-1189e8457345",
@@ -4091,72 +3123,6 @@
             "quantity": 1,
             "supplier": "Trade-in",
             "date_added": "2025-05-30 20:54:50"
-        },
-        {
-            "id": "b7ddd931-c243-4cf1-83c3-9813ffdcaa36",
-            "name": "Iphone",
-            "category": "Accessory",
-            "model_number": "11",
-            "imei_number": "",
-            "purchase_price": 63000.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 20:54:50"
-        },
-        {
-            "id": "a9aebcb8-5e7b-4fae-ae49-224be007eb19",
-            "name": "vivo",
-            "category": "Back Cover",
-            "model_number": "y93",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 21:13:20"
-        },
-        {
-            "id": "f63d690c-7f44-4b17-9ead-816350e1026a",
-            "name": "airpods ",
-            "category": "Back Cover",
-            "model_number": "pro",
-            "imei_number": "",
-            "purchase_price": 500.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 21:16:46"
-        },
-        {
-            "id": "717c5de2-7edb-4594-a227-727f77e94c88",
-            "name": "iphone",
-            "category": "Back Cover",
-            "model_number": "xs",
-            "imei_number": "",
-            "purchase_price": 600.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 21:18:35"
-        },
-        {
-            "id": "9175ca3d-6614-4e8f-ba88-d381828c73f7",
-            "name": "green lion ",
-            "category": "Back Cover",
-            "model_number": "16 pro max",
-            "imei_number": "",
-            "purchase_price": 4300.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 21:22:44"
-        },
-        {
-            "id": "69d24268-3023-449c-84a5-c8f0a252ac2c",
-            "name": "boxu",
-            "category": "Charger",
-            "model_number": "micro cable",
-            "imei_number": "",
-            "purchase_price": 200.0,
-            "quantity": 0,
-            "supplier": "Borrowed",
-            "date_added": "2025-05-30 21:28:40"
         },
         {
             "id": "35eeb9b7-8a05-4ca4-95cf-723286db4c41",
@@ -4203,40 +3169,34 @@
             "date_added": "2025-07-11 15:01:38"
         },
         {
-            "id": "9992892a-9e78-4aa7-8e03-bf4d793d78fb",
-            "name": "test8729",
-            "category": "Accessories",
-            "model_number": "test8729",
-            "imei_number": "",
-            "purchase_price": 100.0,
-            "selling_price": 150.0,
-            "quantity": 0,
-            "supplier": "",
-            "date_added": "2025-07-17 14:17:00"
-        },
-        {
-            "id": "e02acb09-2d0a-4ea4-9b8a-db0aa4a4c833",
-            "name": "testmadeesha",
-            "category": "Phone",
-            "model_number": "madeesha",
-            "imei_number": "yoo",
-            "purchase_price": 1000.0,
-            "selling_price": 1200.0,
+            "id": "398e6f44-a97d-448c-82d8-dc861e6c3860",
+            "name": "m",
+            "model_number": "as",
+            "purchase_price": 1200.0,
+            "selling_price": 2000.0,
             "quantity": 1,
-            "supplier": "Trade-in",
-            "date_added": "2025-07-17 15:00:25"
+            "supplier": "",
+            "date_added": "2025-07-19 20:37:20"
         },
         {
-            "id": "be229c10-6bdc-46fa-a158-9f1155a4da57",
-            "name": "testshanuka",
-            "category": "Accessories",
-            "model_number": "shanuka",
-            "imei_number": "",
-            "purchase_price": 1000.0,
-            "selling_price": 1500.0,
-            "quantity": 10,
+            "id": "61538d9b-fa36-48e3-8753-0ced8d52a08f",
+            "name": "Shanuka",
+            "model_number": "Madeesha",
+            "purchase_price": 200.0,
+            "selling_price": 500.0,
+            "quantity": 1,
             "supplier": "",
-            "date_added": "2025-07-17 16:11:23"
+            "date_added": "2025-07-19 20:51:29"
+        },
+        {
+            "id": "bcde388b-403a-49c2-9007-08b1423e8f64",
+            "name": "Shanuka",
+            "model_number": "Madeesha",
+            "purchase_price": 100.0,
+            "selling_price": 500.0,
+            "quantity": 1,
+            "supplier": "",
+            "date_added": "2025-07-19 20:53:21"
         }
     ]
 }

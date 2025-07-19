@@ -997,6 +997,34 @@
         color: #dc2626;
     }
 
+    .delete-sale-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-sale-btn:hover {
+        background-color: #c82333;
+    }
+
+    .delete-sale-btn:active {
+        background-color: #bd2130;
+    }
+
+    /* Style for action buttons container */
+    td .view-receipt-btn,
+    td .delete-sale-btn {
+        display: inline-block;
+        margin: 2px;
+    }
+
+
 </style>
 <body>
     <div class="container">
@@ -1227,6 +1255,7 @@
 
 
             <!-- Receipt Modal -->
+
             <div id="receipt-modal" class="modal">
                 <div class="modal-content receipt-modal-content">
                     <span class="close" id="close-receipt">&times;</span>
@@ -1281,7 +1310,9 @@
                                 </td>
                                 <td>
                                     <button class="view-receipt-btn" data-customer="{{ sale.customer_name }}" data-phone="{{ sale.customer_phone }}" data-date="{{ sale.date }}" data-sale-id="{{ sale.id }}">View Receipt</button>
+                                    <button class="delete-sale-btn" data-sale-id="{{ sale.id }}" data-customer="{{ sale.customer_name }}">Delete</button>
                                 </td>
+
                             </tr>
                             {% endfor %}
                         {% else %}
@@ -1546,6 +1577,8 @@
                     option.className = 'select-option';
                     option.innerHTML = `
                         <strong>${item.name}</strong>
+                        <span class="item-category-badge">${item.category}</span>
+                        ${item.type ? `<span class="item-category-badge">${item.type}</span>` : ''}
                         <br>
                         Model: ${item.model_number}
                         ${item.imei_number ? `<br>IMEI: ${item.imei_number}` : ''}
@@ -2325,6 +2358,40 @@
                     alert("Incorrect password.");
                 }
         }
+
+        document.querySelectorAll('.delete-sale-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const saleId = this.getAttribute('data-sale-id');
+                const customerName = this.getAttribute('data-customer');
+                
+                if (confirm(`Are you sure you want to delete the sale for ${customerName}? This action cannot be undone.`)) {
+                    deleteSale(saleId);
+                }
+            });
+        });
+
+        function deleteSale(saleId) {
+            fetch(`/delete_sale/${saleId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Sale deleted successfully');
+                    location.reload(); // Refresh the page to update the sales list
+                } else {
+                    alert('Error deleting sale: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the sale');
+            });
+        }
+
 
     </script>
 </body>

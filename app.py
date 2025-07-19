@@ -656,14 +656,13 @@ def add_multiple_inventory():
     inventory_data = load_inventory()
     
     form_data = request.form
-    
     item_index = 0
+    
     while True:
         item_name_key = f'items[{item_index}][name]'
         if item_name_key not in form_data:
             break
         
-        category = form_data[f'items[{item_index}][category]']
         quantity = int(form_data[f'items[{item_index}][quantity]'])
         purchase_price = float(form_data[f'items[{item_index}][purchase_price]'])
         selling_price = float(form_data[f'items[{item_index}][selling_price]'])
@@ -671,20 +670,19 @@ def add_multiple_inventory():
         new_item = {
             'id': str(uuid.uuid4()),
             'name': form_data[f'items[{item_index}][name]'],
-            'category': category,
             'model_number': form_data[f'items[{item_index}][model_number]'],
-            'imei_number': '',
             'purchase_price': purchase_price,
             'selling_price': selling_price,
             'quantity': quantity,
             'supplier': form_data.get(f'items[{item_index}][supplier]', ''),
             'date_added': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
+        
         inventory_data['inventory'].append(new_item)
         
         add_expense_record(
             'Inventory Purchase',
-            f"{category}: {new_item['name']} (Model: {new_item['model_number']}, Qty: {quantity})",
+            f"{new_item['name']} (Model: {new_item['model_number']}, Qty: {quantity})",
             purchase_price * quantity
         )
         
@@ -708,26 +706,66 @@ def edit_inventory_item(item_id):
     if request.method == 'POST':
         item = inventory_data['inventory'][item_index]
         
+        # Store original values for comparison
+        original_purchase_price = item['purchase_price']
+        original_quantity = item['quantity']
+        
+        # Update item fields
         item['name'] = request.form['name']
-        item['category'] = request.form['category']
         item['model_number'] = request.form['model_number']
-        item['imei_number'] = ''
         item['purchase_price'] = float(request.form['purchase_price'])
         item['selling_price'] = float(request.form['selling_price'])
         item['quantity'] = int(request.form['quantity'])
-        item['supplier'] = request.form['supplier']
+        item['supplier'] = request.form.get('supplier', '')
+        
+        # Add last_modified timestamp
+        item['last_modified'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        # If purchase price or quantity changed, add an expense record for the difference
+        new_purchase_price = item['purchase_price']
+        new_quantity = item['quantity']
+        
+        if new_purchase_price != original_purchase_price or new_quantity != original_quantity:
+            # Calculate the difference in total cost
+            original_total_cost = original_purchase_price * original_quantity
+            new_total_cost = new_purchase_price * new_quantity
+            cost_difference = new_total_cost - original_total_cost
+            
+            if cost_difference != 0:
+                description = f"Inventory update for {item['name']} - "
+                if cost_difference > 0:
+                    description += f"Additional cost: {cost_difference}"
+                else:
+                    description += f"Cost reduction: {abs(cost_difference)}"
+                
+                add_expense_record(
+                    'Inventory Adjustment',
+                    description,
+                    cost_difference
+                )
         
         save_inventory(inventory_data)
         flash('Item updated successfully', 'success')
         return redirect(url_for('inventory'))
     
-    return render_template('edit_inventory.html', item=inventory_data['inventory'][item_index])
+    return render_template('edit_inventory.html',
+                          item=inventory_data['inventory'][item_index],
+                          shop_name=session['shop_name'])
 
 @app.route('/delete_inventory_item/<item_id>', methods=['POST'])
 @login_required
 def delete_inventory_item(item_id):
     inventory_data = load_inventory()
     
+    # Find the item to get its details before deletion
+    item_to_delete = next((item for item in inventory_data['inventory'] 
+                          if item['id'] == item_id), None)
+    
+    if item_to_delete is None:
+        flash('Item not found', 'error')
+        return redirect(url_for('inventory'))
+    
+    # Remove the item from inventory
     inventory_data['inventory'] = [item for item in inventory_data['inventory']
                                   if item['id'] != item_id]
     
@@ -863,7 +901,7 @@ def add_multiple_sales():
                 'customer_phone': customer_phone,
                 'item_id': item_id,
                 'item_name': item['name'],
-                'category': item['category'],
+                'category': item.get('category', 'Other'),
                 'model_number': item['model_number'],
                 'imei_number': imei_number,
                 'quantity': quantity,
@@ -1160,26 +1198,52 @@ def update_credit_status(credit_id, status, payment_amount=0):
         print(f"Error updating credit status: {str(e)}")
         return False
 
-@app.route('/delete_sale/<sale_id>', methods=['POST'])
+@app.route('/delete_sale/<sale_id>', methods=['DELETE'])
 @login_required
 def delete_sale(sale_id):
-    sale, file_path, sales_data = find_sale_by_id(sale_id)
+    ensure_shop_folders(session['shop_name'])
     
-    if not sale:
-        flash('Sale not found', 'error')
-        return redirect(url_for('sales'))
+    sales_data = load_daily_data('sales')
+    inventory_data = load_inventory()
     
-    return_items_to_inventory(sale)
+    # Find the sale to delete
+    sale_to_delete = None
+    for sale in sales_data['sales']:
+        if sale['id'] == sale_id:
+            sale_to_delete = sale
+            break
     
-    sales_data['sales'] = [s for s in sales_data['sales'] if s['id'] != sale_id]
+    if not sale_to_delete:
+        return jsonify({'error': 'Sale not found'}), 404
     
+    # Reverse inventory changes based on sale type
+    if sale_to_delete['type'] == 'regular':
+        # Add quantity back to existing inventory item
+        item = next((item for item in inventory_data['inventory'] if item['id'] == sale_to_delete['item_id']), None)
+        if item:
+            item['quantity'] += sale_to_delete['quantity']
+    
+    elif sale_to_delete['type'] == 'trade_in':
+        # Remove the trade-in item from inventory (it was added during sale)
+        inventory_data['inventory'] = [item for item in inventory_data['inventory'] if item['id'] != sale_to_delete['item_id']]
+    
+    elif sale_to_delete['type'] == 'borrowed_and_sold':
+        # Remove the borrowed item from inventory (it was added during sale)
+        inventory_data['inventory'] = [item for item in inventory_data['inventory'] if item['id'] != sale_to_delete['item_id']]
+    
+    # Remove the sale record
+    sales_data['sales'] = [sale for sale in sales_data['sales'] if sale['id'] != sale_id]
+    
+    # Update daily summary
     sales_data = update_daily_summary(sales_data)
     
-    with open(file_path, 'w') as f:
-        json.dump(sales_data, f, indent=4)
+    # Save data
+    save_inventory(inventory_data)
+    save_daily_data('sales', sales_data)
+    update_daily_capital()
     
-    flash('Sale deleted and items returned to inventory', 'success')
-    return redirect(url_for('sales'))
+    return jsonify({'success': True, 'message': 'Sale deleted successfully'})
+
 
 @app.route('/expenses')
 @login_required

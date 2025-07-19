@@ -1,0 +1,26 @@
+{
+    "expenses": [
+        {
+            "id": "b6cabdb2-89ef-4110-b2fb-9cadec997304",
+            "category": "Inventory Purchase",
+            "description": "m (Model: as, Qty: 1)",
+            "amount": 1200.0,
+            "date": "2025-07-19 20:37:20"
+        },
+        {
+            "id": "6ac635e8-a313-4243-be12-957f8b7ddd7d",
+            "category": "Inventory Purchase",
+            "description": "Shanuka (Model: Madeesha, Qty: 1)",
+            "amount": 200.0,
+            "date": "2025-07-19 20:51:29"
+        },
+        {
+            "id": "9f185dc1-6d3b-43b6-8f9b-620a93f94893",
+            "category": "Inventory Purchase",
+            "description": "Shanuka (Model: Madeesha, Qty: 1)",
+            "amount": 100.0,
+            "date": "2025-07-19 20:53:21"
+        }
+    ],
+    "daily_summary": {}
+}

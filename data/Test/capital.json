@@ -1,7 +1,15 @@
 {
     "initial_capital": 0,
-    "current_capital": 43550.0,
+    "current_capital": 42050.0,
     "daily_updates": [
+        {
+            "date": "2025-07-19",
+            "sales": 0,
+            "expenses": 1500.0,
+            "daily_profit": -1500.0,
+            "capital_before": 43550.0,
+            "capital_after": 42650.0
+        },
         {
             "date": "2025-07-17",
             "sales": 1150.0,
